@@ -47,15 +47,16 @@ class GameState():
 
 		for p in winning:
 			p.chipCount += self.pot / len(winning)
+
 		return [p.name for p in winning]
 
 
 	def summarizeGame(self):
 		print('')
+		winners = self.checkWinner()
+
 		for player in self.players:
 			player.printPlayerInfo()
-
-		winners = self.checkWinner()
 		print('Winning player(s):', ', '.join(winners))
 	
 	

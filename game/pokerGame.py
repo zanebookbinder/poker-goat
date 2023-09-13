@@ -16,10 +16,15 @@ class PokerGame():
 
 	def playSimplePoker(self):
 		self.playerTurn(0, ['bet', 'check'])
-		self.playerTurn(1, ['call', 'fold'])
+		self.playerTurn(1, ['call', 'check', 'fold'])
 		self.gameState.summarizeGame()
 
 	def playerTurn(self, playerIndex, options=['bet', 'check', 'fold', 'call', 'raise']):
+		if not self.gameState.currentRoundBet and 'call' in options:
+			options.remove('call')
+		if self.gameState.currentRoundBet and 'check' in options:
+			options.remove('check')
+
 		action = self.gameState.players[playerIndex].takeTurn(self.gameState, options)
 
 		if action == 'bet':
