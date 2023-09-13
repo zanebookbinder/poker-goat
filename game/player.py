@@ -2,8 +2,9 @@ from hand import Hand
 import random
 
 class Player():
-	def __init__(self, name, chipCount):
+	def __init__(self, name, index, chipCount):
 		self.name = name
+		self.index = index
 		self.hand = Hand()
 		self.currentBet = 0
 		self.chipCount = chipCount

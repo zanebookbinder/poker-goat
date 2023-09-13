@@ -42,8 +42,8 @@ class PokerGame():
 
 	
 def main():
-	player1 = Player('Olivia', 100)
-	player2 = Player('Zane', 100)
+	player1 = Player('Olivia', 0,  100)
+	player2 = Player('Zane', 1, 100)
 	pg = PokerGame([player1, player2])
 	pg.playSimplePoker()
 	
