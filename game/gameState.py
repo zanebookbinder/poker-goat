@@ -10,6 +10,7 @@ class GameState():
 		self.turn = 0
 		self.round = 0
 		self.deck = Deck()
+		#currentRoundBet notes how much each player must have in the pot in order to continue playing
 		self.currentRoundBet = 0
 		self.winner = None
 

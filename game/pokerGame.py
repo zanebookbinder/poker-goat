@@ -15,17 +15,19 @@ class PokerGame():
 				self.gameState.players[i].receiveCard(nextCard)
 
 	def playSimplePoker(self):
-		self.playerTurn(0, ['bet', 'check'])
-		self.playerTurn(1, ['call', 'check', 'fold'])
+		self.playerTurn(self.gameState.players[0], ['bet', 'check'])
+		self.playerTurn(self.gameState.players[1], ['call', 'check', 'fold'])
 		self.gameState.summarizeGame()
 
-	def playerTurn(self, playerIndex, options=['bet', 'check', 'fold', 'call', 'raise']):
+	def playerTurn(self, player, options=['bet', 'check', 'fold', 'call', 'raise']):
+		playerIndex = player.index
+
 		if not self.gameState.currentRoundBet and 'call' in options:
 			options.remove('call')
 		if self.gameState.currentRoundBet and 'check' in options:
 			options.remove('check')
 
-		action = self.gameState.players[playerIndex].takeTurn(self.gameState, options)
+		action = player.takeTurn(self.gameState, options)
 
 		if action == 'bet':
 			self.gameState.bet(playerIndex, 10)
