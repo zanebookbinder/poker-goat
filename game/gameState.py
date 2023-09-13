@@ -1,8 +1,10 @@
 from deck import Deck
+from player import Player
 
 class GameState():
-	def __init__(self, players):
+	def __init__(self, players, start_ante):
 		self.players = players
+		self.ante = start_ante
 		self.startNewHand()
 
 	def startNewHand(self):
@@ -13,6 +15,9 @@ class GameState():
 		#currentRoundBet notes how much each player must have in the pot in order to continue playing
 		self.currentRoundBet = 0
 		self.winner = None
+		for player in self.players:
+			player.chipCount -= self.ante
+			self.pot += self.ante
 
 	def bet(self, playerIndex, amount):
 		self.players[playerIndex].bet(amount)

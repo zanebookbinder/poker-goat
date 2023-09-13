@@ -3,8 +3,9 @@ from player import Player
 from constants import dealSystem
 
 class PokerGame():
-	def __init__(self, players):
-		self.gameState = GameState(players)
+	def __init__(self, players, start_ante):
+		self.start_ante = start_ante
+		self.gameState = GameState(players, start_ante)
 		self.deal()
 
 	def deal(self):
@@ -46,7 +47,8 @@ class PokerGame():
 def main():
 	player1 = Player('Olivia', 0,  100)
 	player2 = Player('Zane', 1, 100)
-	pg = PokerGame([player1, player2])
+	ante = 5
+	pg = PokerGame([player1, player2], ante)
 	pg.playSimplePoker()
 	
 
