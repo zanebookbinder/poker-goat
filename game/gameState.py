@@ -42,14 +42,32 @@ class GameState():
 			return [self.winner.name]
 		
 		activePlayers = self.getActivePlayers()
-		bestHand = -1
+		bestHand = ['junk', -1, -1]
 		winning = []
 		for p in activePlayers:
-			if p.hand.calculateHandValue() > bestHand:
-				bestHand = p.hand.calculateHandValue()
+			handType, bestCard, worstCard = p.hand.calculateSimpleHandValue()
+			if bestHand[0] == 'junk' and handType == 'pair':
+				bestHand = ['pair', bestCard, worstCard]
 				winning = [p]
-			elif p.hand.calculateHandValue() == bestHand:
-				winning.append(p)
+
+			elif bestHand[0] == 'junk' and handType == 'junk':
+				if bestCard > bestHand[1]:
+					bestHand = ['junk', bestCard, worstCard]
+					winning = [p]
+				elif bestCard == bestHand[1]:
+					if worstCard > bestHand[2]:
+						bestHand = ['junk', bestCard, worstCard]
+						winning = [p]
+					elif worstCard == bestHand[2]:
+						winning.append(p)
+
+			
+			elif bestHand[0] == 'pair' and handType == 'pair':
+				if bestCard > bestHand[1]:
+					bestHand = ['pair', bestCard, worstCard]
+					winning = [p]
+				if bestCard == bestHand[1]:
+					winning.append(p)
 
 		for p in winning:
 			p.chipCount += self.pot / len(winning)

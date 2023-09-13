@@ -1,6 +1,7 @@
 from gameState import GameState
 from player import Player
 from constants import dealSystem
+from card import Card
 
 class PokerGame():
 	def __init__(self, players, start_ante):
@@ -25,6 +26,8 @@ class PokerGame():
 
 		if not self.gameState.currentRoundBet and 'call' in options:
 			options.remove('call')
+		if not self.gameState.currentRoundBet and 'fold' in options:
+			options.remove('fold')
 		if self.gameState.currentRoundBet and 'check' in options:
 			options.remove('check')
 
