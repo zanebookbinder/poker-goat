@@ -17,21 +17,28 @@ class PokerGame():
 				self.gameState.players[i].receiveCard(nextCard)
 
 	def playSimplePoker(self):
-		self.playerTurn(self.gameState.players[0], ['bet', 'check'])
-		self.playerTurn(self.gameState.players[1], ['call', 'check', 'fold'])
-		self.gameState.summarizeGame()
+		for _ in range(10):
+			self.playerTurn(self.gameState.players[0], ['bet', 'check'])
+			self.playerTurn(self.gameState.players[1], ['call', 'check', 'fold'])
+			self.gameState.summarizeGame()
+			self.gameState.startNewHand()
 
 	def playerTurn(self, player, options=['bet', 'check', 'fold', 'call', 'raise']):
 		playerIndex = player.index
 
+		# can't call if no current bet (that would be a check)
 		if not self.gameState.currentRoundBet and 'call' in options:
 			options.remove('call')
+
+		# don't fold if not current bet (checking dominates folding)
 		if not self.gameState.currentRoundBet and 'fold' in options:
 			options.remove('fold')
+
+		# can't check if there is already a bet
 		if self.gameState.currentRoundBet and 'check' in options:
 			options.remove('check')
 
-		action = player.takeTurn(self.gameState, options)
+		action = player.takeTurn(options)
 
 		if action == 'bet':
 			self.gameState.bet(playerIndex, 10)
@@ -46,9 +53,8 @@ class PokerGame():
 			self.gameState.fold(playerIndex)
 		
 
-	
 def main():
-	player1 = Player('Olivia', 0,  100)
+	player1 = Player('Rahul', 0,  100)
 	player2 = Player('Zane', 1, 100)
 	ante = 5
 	pg = PokerGame([player1, player2], ante)

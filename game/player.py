@@ -15,13 +15,10 @@ class Player():
 		self.currentBet += amount
 		self.chipCount -= amount
 
-	def takeTurn(self, gameState, options):
-		# TO DO: IMPLEMENT THIS #
-		if not gameState.currentRoundBet and 'fold' in options:
-			options.remove('fold')
+	def takeTurn(self, options):
 		result = random.choice(options)
 		if self.debugOutput:
-			print(self.name, ' takes action:', result)
+			print(self.name, 'takes action:', result)
 		return result
 	
 	def receiveCard(self, card):
@@ -31,7 +28,7 @@ class Player():
 		print(self.name, 'has:')
 		for card in self.hand.cards:
 			card.printCard()
-		print('Current Chip count: ', self.chipCount)
+		print('Current Chip count: ', str(int(self.chipCount)))
 		if self.folded:
 			print('** Has already folded **')
 		print('')

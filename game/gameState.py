@@ -74,7 +74,6 @@ class GameState():
 
 		return [p.name for p in winning]
 
-
 	def summarizeGame(self):
 		print('')
 		winners = self.checkWinner()
