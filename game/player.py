@@ -5,21 +5,37 @@ class Player():
 	def __init__(self, name, index, chipCount):
 		self.name = name
 		self.index = index
-		self.hand = Hand()
-		self.currentBet = 0
 		self.chipCount = chipCount
+		self.debugOutput = False
+		self.handWinCounter = 0
+		self.startNewHand()
+
+	def startNewHand(self):
 		self.folded = False
-		self.debugOutput = True
+		self.currentBet = 0
+		self.hand = Hand()
 
 	def bet(self, amount):
 		self.currentBet += amount
 		self.chipCount -= amount
 
 	def takeTurn(self, options):
-		result = random.choice(options)
+		action = None
+		if sorted(options) == ['call', 'fold']:
+			action = 'call' if self.hasGoodHand() else 'fold'
+		
+		elif sorted(options) == ['bet', 'check']:
+			action = 'bet' if self.hasGoodHand() else 'check'
+
 		if self.debugOutput:
-			print(self.name, 'takes action:', result)
-		return result
+			print(self.name, 'takes action:', action)
+		return action
+	
+	def hasGoodHand(self):
+		handType, highCard, lowCard = self.hand.calculateSimpleHandValue()
+		if handType == 'pair' or highCard > 7:
+			return 'call'
+		return 'fold'
 	
 	def receiveCard(self, card):
 		self.hand.addCardToHand(card)

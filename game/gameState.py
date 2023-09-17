@@ -1,4 +1,5 @@
 from deck import Deck
+from constants import dealSystem
 from player import Player
 
 class GameState():
@@ -9,15 +10,27 @@ class GameState():
 
 	def startNewHand(self):
 		self.pot = 0
+		for player in self.players:
+			player.startNewHand()
+			player.chipCount -= self.ante
+			self.pot += self.ante
+
 		self.turn = 0
 		self.round = 0
 		self.deck = Deck()
+		self.deal()
+		
 		#currentRoundBet notes how much each player must have in the pot in order to continue playing
 		self.currentRoundBet = 0
 		self.winner = None
-		for player in self.players:
-			player.chipCount -= self.ante
-			self.pot += self.ante
+		
+
+	def deal(self):
+		numCardsToDeal = dealSystem[self.round]
+		for _ in range(numCardsToDeal):
+			for i in range(len(self.players)):
+				nextCard = self.deck.selectRandomCard()
+				self.players[i].receiveCard(nextCard)
 
 	def bet(self, playerIndex, amount):
 		self.players[playerIndex].bet(amount)
@@ -39,6 +52,7 @@ class GameState():
 	def checkWinner(self):
 		if self.winner:
 			self.winner.chipCount += self.pot
+			self.winner.handWinCounter += 1
 			return [self.winner.name]
 		
 		activePlayers = self.getActivePlayers()
@@ -72,6 +86,8 @@ class GameState():
 		for p in winning:
 			p.chipCount += self.pot / len(winning)
 
+		for p in winning:
+			p.handWinCounter += 1
 		return [p.name for p in winning]
 
 	def summarizeGame(self):
