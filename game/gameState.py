@@ -24,7 +24,6 @@ class GameState():
 		self.currentRoundBet = 0
 		self.winner = None
 		
-
 	def deal(self):
 		numCardsToDeal = dealSystem[self.round]
 		for _ in range(numCardsToDeal):

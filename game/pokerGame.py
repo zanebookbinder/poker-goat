@@ -55,6 +55,5 @@ def main():
 	pg = PokerGame([player1, player2], ante)
 	pg.playSimplePoker()
 	
-
 if __name__ == '__main__':
 	main()

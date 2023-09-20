@@ -28,13 +28,24 @@ handTypeToValue = {
 }
 
 def test():
-	card1 = Card(0, 7)
-	card2 = Card(1, 7)
-	card3 = Card(2, 7)
-	card4 = Card(3, 7)
-	card5 = Card(2, 5)
-	cards = [card1, card2, card3, card4, card5]
-	return isFourOfAKind(cards)
+	cards1 = [
+		Card(1, 7),
+		Card(1, 8),
+		Card(1, 9),
+		Card(1, 10),
+		Card(1, 11)
+	]
+
+	cards2 = [
+		Card(1, 7),
+		Card(1, 7),
+		Card(2, 7),
+		Card(3, 8),
+		Card(1, 8)
+	]
+
+	return compareAllHands([cards1, cards2])
+
 
 # Helper methods #
 
@@ -52,14 +63,8 @@ def isStraightFlush(cards):
 
 def isFourOfAKind(cards):
 	c = Counter(getCardValues(cards)) # {rank: count}
-	if max([value for value in c.values()]) == 4:
-		fourOfAKindCard = [rank for rank in c if c[rank] == 4][0]
-		otherCard = [rank for rank in c if c[rank] == 1][0]
-		hand = [fourOfAKindCard] * 4 + [otherCard]
-		return ('four of a kind', hand)
-	else:
-		return ["fail"]
-
+	return max([value for value in c.values()]) == 4
+	
 def isFullHouse(cards):
 	c = Counter(getCardValues(cards))
 	triple = pair = False
@@ -96,21 +101,72 @@ def isPair(cards):
 
 ##########################################################################################
 
+def sortCards(cards):
+	if isFlush(cards) and not isFullHouse(cards) and not isFourOfAKind(cards): # sort cards by Rank only
+		values = getCardValues(cards)
+		values.sort(reverse=True)
+		return values
+	c = Counter(getCardValues(cards))
+	ranksAndCounts = [(rank, count) for rank, count in c.items()]
 
+	# sort cards by count first, then Rank (both descending)
+	ranksAndCounts.sort(key=lambda x: (-x[1], -x[0]))
+	output = []
+	for rank, count in ranksAndCounts:
+		output.extend([rank] * count)
+	return output
 
 def judgeHand(cards):
-	return
+	hand = sortCards(cards)
+	if isStraightFlush(cards):
+		return ("straight flush", hand)
+	elif isFourOfAKind(cards):
+		return ("four of a kind", hand)
+	elif isFullHouse(cards):
+		return ("full house", hand)
+	elif isFlush(cards):
+		return ("flush", hand)
+	elif isStraight(cards):
+		return ("straight", hand)
+	elif isThreeOfAKind(cards):
+		return ("three of a kind", hand)
+	elif isTwoPair(cards):
+		return ("two pair", hand)
+	elif isPair(cards):
+		return ("pair", hand)
+	else:
+		return ("junk", hand)
+	
+##########################################################################################
 
+def compareIdenticalHands(hand1, hand2):
+	for i in range(len(hand1)):
+		if hand1[i] > hand2[i]:
+			return 1 # hand 1 wins
+		elif hand1[i] < hand2[i]:
+			return -1 # hand 2 wins	
+	return 0 # tie
+
+# handList: 2D list of cards
+def compareAllHands(cardsList):
+	judgedCards = [judgeHand(cards) for cards in cardsList]
+	bestHands = [judgedCards[0]]
+	bestHandIndices = [0]
+
+	for i, (type, hand) in enumerate(judgedCards[1:]):
+		if handTypeToValue[type] > handTypeToValue[bestHands[0][0]]:
+			bestHands = [(type, hand)]
+			bestHandIndices = [i+1]
+		elif handTypeToValue[type] == handTypeToValue[bestHands[0][0]]:
+			winner = compareIdenticalHands(bestHands[0][1], hand)
+			if winner == -1:
+				bestHands = [(type, hand)]
+				bestHandIndices = [i+1]
+			if not winner:
+				bestHands.append((type, hand))
+				bestHandIndices.append(i+1)
+
+	return {bestHandIndices[i]: bestHands[i] for i in range(len(bestHandIndices))}
 
 if __name__ == "__main__":
 	print(test())
-
-
-
-##########################################################################################
-
-def compareHands(handList):
-    bestHand = handList[0]
-    for hand in handList:
-        #TODO
-        pass
