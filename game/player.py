@@ -21,9 +21,11 @@ class Player():
 
 	def takeTurn(self, options):
 		action = None
+		if options == ['preflop']:
+			action = random.choice(['bet', 'check'])
+			print("PREFLOP ACTION", action)
 		if sorted(options) == ['call', 'fold']:
 			action = 'call' if self.hasGoodHand() else 'fold'
-		
 		elif sorted(options) == ['bet', 'check']:
 			action = 'bet' if self.hasGoodHand() else 'check'
 

@@ -1,18 +1,31 @@
 from gameState import GameState
 from player import Player
-from card import Card
 
 class PokerGame():
 	def __init__(self, players, start_ante):
 		self.start_ante = start_ante
 		self.gameState = GameState(players, start_ante)
 
-	def playSimplePoker(self):
+	def playMediumPoker(self):
+		
 		for _ in range(1000):
 			self.gameState.startNewHand()
 			self.playerTurn(self.gameState.players[0], ['bet', 'check'])
 			self.playerTurn(self.gameState.players[1], ['call', 'check', 'fold'])
 			self.gameState.checkWinner()
+		
+		for p in self.gameState.players:
+			print(p.name, p.handWinCounter)
+		self.gameState.summarizeGame()
+
+	def playSimplePoker(self):
+		# for _ in range(1000):
+		self.gameState.startNewHand()
+		self.playerTurn(self.gameState.players[0], ['preflop'])
+		self.playerTurn(self.gameState.players[1], ['preflop'])
+		self.playerTurn(self.gameState.players[0], ['bet', 'check'])
+		self.playerTurn(self.gameState.players[1], ['call', 'check', 'fold'])
+		self.gameState.checkWinner()
 
 		for p in self.gameState.players:
 			print(p.name, p.handWinCounter)
@@ -53,7 +66,7 @@ def main():
 	player2 = Player('Zane', 1, 100)
 	ante = 5
 	pg = PokerGame([player1, player2], ante)
-	pg.playSimplePoker()
+	pg.playMediumPoker()
 	
 if __name__ == '__main__':
 	main()

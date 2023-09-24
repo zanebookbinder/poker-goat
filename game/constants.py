@@ -2,6 +2,8 @@ dealSystem = [
 	2
 ]
 
+commonCardSize = 3
+
 suits = {
 	0: 'Hearts',
 	1: 'Diamonds',
