@@ -10,6 +10,7 @@ class Player():
 		self.chipCount = chipCount
 		self.debugOutput = False
 		self.handWinCounter = 0
+		self.foldedCounter = 0
 		self.startNewHand()
 
 	def startNewHand(self):
@@ -19,27 +20,49 @@ class Player():
 
 	def bet(self, amount):
 		self.currentBet += amount
-		print('PLAYER CURRENT BET IS NOW', self.currentBet)
 		self.chipCount -= amount
 
 	def chooseAction(self, sharedCards, options):
 		action = None
 		if not sharedCards:
-			print('Good hole cards --> bet' if self.hasGoodHoleCards() else 'Bad hole cards --> check/fold')
-			if options == ['bet', 'fold']:
-				action = 'bet' if self.hasGoodHoleCards() else 'fold'
-			elif options == ['bet', 'check']:
-				action = 'bet' if self.hasGoodHoleCards() else 'check'
+			holeCardRating = self.hasGoodHoleCards()
+			if self.debugOutput:
+				prints = ['Great hole cards --> raise', 'Good hole cards --> bet', 'Bad hole cards --> check/fold']
+				print(prints[holeCardRating])
+			if options == ['bet', 'fold', 'raise']:
+				if holeCardRating == 2:
+					action = 'raise'
+				elif holeCardRating == 1:
+					action = 'bet'
+				else:
+					action = 'fold'
+			elif options == ['bet', 'check', 'raise']:
+				if holeCardRating == 2:
+					action = 'raise'
+				elif holeCardRating == 1:
+					action = 'bet'
+				else:
+					action = 'check'
 			else:
-				print("ALERT", options)
+				print("ALERT, THESE OPTIONS ARE NOT OK", options)
 		else:
 			score = scoreHand(self.hand.cards, sharedCards)
-			print('Good 5-card hand --> bet' if score > 0.5 else 'Bad 5-card hand --> check/fold')
+			scoreRating = 0
+			if score > 0.75:
+				scoreRating = 2
+			elif score > 0.5:
+				scoreRating = 1
 
-			if options == ['bet', 'fold']:
-				action = 'bet' if score > 0.5 else 'fold'
-			elif options == ['bet', 'check']:
-				action = 'bet' if score > 0.5 else 'check'
+			if self.debugOutput:
+				prints = ['Great 5-card hand --> raise', 'Good 5-card hand --> bet', 'Bad 5-card hand --> check/fold']
+				print(prints[scoreRating])
+
+			if options == ['bet', 'fold', 'raise']:
+				action = ['fold', 'bet', 'raise'][scoreRating]
+			elif options == ['bet', 'check', 'raise']:
+				action = ['check', 'bet', 'raise'][scoreRating]
+			else:
+				print("ALERT, THESE OPTIONS ARE NOT OK", options)
 
 		if self.debugOutput:
 			print(self.name, 'takes action:', action)
@@ -47,10 +70,19 @@ class Player():
 	
 	def hasGoodHoleCards(self):
 		handType, highCard, lowCard = self.hand.calculateSimpleHandValue()
-		if handType == 'pair' or highCard > 7:
-			return True
+		if handType == 'pair' or highCard > 11:
+			return 2
 		
-		return False
+		if highCard > 7:
+			return 1
+
+		if highCard - lowCard == 1 and lowCard > 3 and random.random() > 0.5:
+			return 1
+		
+		if self.hand.suitedHand() and random.random() > 0.5:
+			return 1
+		
+		return 0
 	
 	def receiveCard(self, card):
 		self.hand.addCardToHand(card)

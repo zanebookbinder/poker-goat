@@ -28,6 +28,8 @@ class GameState():
 	def startNewRound(self):
 		self.round += 1
 		self.currentRoundBet = 0
+		for player in self.players:
+			player.currentBet = 0
 		
 	def deal(self):
 		numCardsToDeal = dealSystem[self.round]
@@ -48,21 +50,21 @@ class GameState():
 
 	def fold(self, playerIndex):
 		self.players[playerIndex].folded = True
-		activePlayers = self.getActivePlayers()
-		if len(activePlayers) == 1:
-			self.winner = activePlayers[0]
+		self.players[playerIndex].foldedCounter += 1
 
 	def getActivePlayers(self):
 		return [p for p in self.players if not p.folded]
 
 	def checkWinner(self):
-		if self.winner:
+		activePlayers = self.getActivePlayers()
+		if len(activePlayers) == 1:
+			self.winner = activePlayers[0]
 			self.winner.chipCount += self.pot
 			self.winner.handWinCounter += 1
 			self.winnerDict = {self.winner: 'wins as the only remaining player'}
 			return self.winnerDict
 		
-		playerHands = [p.hand.cards + self.sharedCards for p in self.players]
+		playerHands = [p.hand.cards + self.sharedCards for p in activePlayers]
 		winningPlayersIndicesToHandsDict = compareAllHands(playerHands)
 		# looks something like this: {0: ('junk', [14, 11, 7, 6, 5])}
 		
@@ -76,6 +78,8 @@ class GameState():
 		return self.winnerDict
 
 	def summarizeGame(self):
+		for p in self.players:
+			print(p.name, 'won', p.handWinCounter, 'hands and folded', p.foldedCounter, 'times')
 		print('')
 
 		for player in self.players:
