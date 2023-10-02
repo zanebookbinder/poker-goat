@@ -46,7 +46,6 @@ def test():
 
 	return compareAllHands([cards1, cards2])
 
-
 # Helper methods #
 
 def getCardValues(cards):

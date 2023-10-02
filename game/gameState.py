@@ -24,26 +24,27 @@ class GameState():
 		#currentRoundBet notes how much each player must have in the pot in order to continue playing
 		self.currentRoundBet = 0
 		self.winner = None
+
+	def startNewRound(self):
+		self.round += 1
+		self.currentRoundBet = 0
 		
 	def deal(self):
-		numCardsToDeal = commonCardSize
-		for _ in range(numCardsToDeal):
-			nextCard = self.deck.selectRandomCard()
-			self.sharedCards.append(nextCard)
-
 		numCardsToDeal = dealSystem[self.round]
 		for _ in range(numCardsToDeal):
 			for i in range(len(self.players)):
 				nextCard = self.deck.selectRandomCard()
 				self.players[i].receiveCard(nextCard)
 
+		numCardsToDeal = commonCardSize
+		for _ in range(numCardsToDeal):
+			nextCard = self.deck.selectRandomCard()
+			self.sharedCards.append(nextCard)
+
 	def bet(self, playerIndex, amount):
 		self.players[playerIndex].bet(amount)
 		self.pot += amount
-		self.currentRoundBet = max(self.currentRoundBet, self.players[playerIndex].currentBet)
-
-	def call(self, playerIndex):
-		self.bet(playerIndex, self.currentRoundBet)
+		self.currentRoundBet = max(self.currentRoundBet, amount)
 
 	def fold(self, playerIndex):
 		self.players[playerIndex].folded = True
@@ -86,7 +87,10 @@ class GameState():
 		print('')
 
 		for winningPlayer, hand in self.winnerDict.items():
-			print(winningPlayer.name, 'wins with', hand[0])
+			if type(hand) == str: # all players folded, one player left
+				print(winningPlayer.name, 'wins as the only remaining player')
+			else:
+				print(winningPlayer.name, 'wins with', hand[0])
 		# print('Winning player(s):', ', '.join(winners))
 	
 	

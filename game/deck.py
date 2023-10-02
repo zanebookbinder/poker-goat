@@ -21,3 +21,17 @@ class Deck():
 		self.usedCards.append(card)
 		self.cards.remove(card)
 		return card
+	
+	def removeCardsFromDeck(self, cardsToRemove):
+		newCards = []
+		for card in self.cards:
+			removeMe = False
+			for cardToRemove in cardsToRemove:
+				if card.sameCard(cardToRemove):
+					removeMe = True
+					break
+
+			if not removeMe:
+				newCards.append(card)
+
+		self.cards = newCards

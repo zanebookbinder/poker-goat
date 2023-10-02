@@ -1,5 +1,7 @@
 from hand import Hand
 import random
+from handRankUtil import judgeHand
+from handScoreUtil import scoreHand
 
 class Player():
 	def __init__(self, name, index, chipCount):
@@ -17,27 +19,38 @@ class Player():
 
 	def bet(self, amount):
 		self.currentBet += amount
+		print('PLAYER CURRENT BET IS NOW', self.currentBet)
 		self.chipCount -= amount
 
-	def takeTurn(self, options):
+	def chooseAction(self, sharedCards, options):
 		action = None
-		if options == ['preflop']:
-			action = random.choice(['bet', 'check'])
-			print("PREFLOP ACTION", action)
-		if sorted(options) == ['call', 'fold']:
-			action = 'call' if self.hasGoodHand() else 'fold'
-		elif sorted(options) == ['bet', 'check']:
-			action = 'bet' if self.hasGoodHand() else 'check'
+		if not sharedCards:
+			print('Good hole cards --> bet' if self.hasGoodHoleCards() else 'Bad hole cards --> check/fold')
+			if options == ['bet', 'fold']:
+				action = 'bet' if self.hasGoodHoleCards() else 'fold'
+			elif options == ['bet', 'check']:
+				action = 'bet' if self.hasGoodHoleCards() else 'check'
+			else:
+				print("ALERT", options)
+		else:
+			score = scoreHand(self.hand.cards, sharedCards)
+			print('Good 5-card hand --> bet' if score > 0.5 else 'Bad 5-card hand --> check/fold')
+
+			if options == ['bet', 'fold']:
+				action = 'bet' if score > 0.5 else 'fold'
+			elif options == ['bet', 'check']:
+				action = 'bet' if score > 0.5 else 'check'
 
 		if self.debugOutput:
 			print(self.name, 'takes action:', action)
 		return action
 	
-	def hasGoodHand(self):
+	def hasGoodHoleCards(self):
 		handType, highCard, lowCard = self.hand.calculateSimpleHandValue()
 		if handType == 'pair' or highCard > 7:
-			return 'call'
-		return 'fold'
+			return True
+		
+		return False
 	
 	def receiveCard(self, card):
 		self.hand.addCardToHand(card)
