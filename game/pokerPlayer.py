@@ -18,7 +18,10 @@ class pokerPlayer(player):
     def createModel():
         model = Sequential()
         model.add(Dense(64, input_dim=27, activation= 'sigmoid'))
-        model.add(Dense(14, activation = "relu"))
+        model.add(Dense(128, activation = "relu"))
+        model.add(Dense(64, activation = "relu"))
+        model.add(Dense(32, activation = "relu"))
+        model.add(Dense(16, activation = "relu"))
         model.add(Dense(8, activation = "relu"))
         model.add(Dense(3, activation  = "softmax"))
 
