@@ -96,5 +96,3 @@ class GameState():
 			else:
 				print(winningPlayer.name, 'wins with', hand[0])
 		# print('Winning player(s):', ', '.join(winners))
-	
-	
