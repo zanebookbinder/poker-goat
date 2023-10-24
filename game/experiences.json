@@ -1,0 +1,88 @@
+[
+    {
+        "holeCards": [0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+        "commonCards": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "suitMode": 1,
+        "round": 1,
+        "bettingLevel": 0,
+        "pot": 10,
+        "actionTaken": "raise",
+        "nextExperience": null,
+        "reward": 5
+    },
+    {
+        "holeCards": [0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+        "commonCards": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "suitMode": 1,
+        "round": 1,
+        "bettingLevel": 20,
+        "pot": 30,
+        "actionTaken": "fold",
+        "nextExperience": null,
+        "reward": -5
+    },
+    {
+        "holeCards": [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        "commonCards": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "suitMode": 2,
+        "round": 1,
+        "bettingLevel": 0,
+        "pot": 10,
+        "actionTaken": "raise",
+        "nextExperience": {
+            "holeCards": [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            "commonCards": [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            "suitMode": 2,
+            "round": 2,
+            "bettingLevel": 0,
+            "pot": 50,
+            "actionTaken": "raise",
+            "nextExperience": null,
+            "reward": 45.0
+        },
+        "reward": 0
+    },
+    {
+        "holeCards": [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        "commonCards": [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        "suitMode": 2,
+        "round": 2,
+        "bettingLevel": 0,
+        "pot": 50,
+        "actionTaken": "raise",
+        "nextExperience": null,
+        "reward": 45.0
+    },
+    {
+        "holeCards": [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+        "commonCards": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "suitMode": 1,
+        "round": 1,
+        "bettingLevel": 20,
+        "pot": 30,
+        "actionTaken": "raise",
+        "nextExperience": {
+            "holeCards": [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+            "commonCards": [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+            "suitMode": 2,
+            "round": 2,
+            "bettingLevel": 20,
+            "pot": 70,
+            "actionTaken": "raise",
+            "nextExperience": null,
+            "reward": -45
+        },
+        "reward": 0
+    },
+    {
+        "holeCards": [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+        "commonCards": [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+        "suitMode": 2,
+        "round": 2,
+        "bettingLevel": 20,
+        "pot": 70,
+        "actionTaken": "raise",
+        "nextExperience": null,
+        "reward": -45
+    }
+]
