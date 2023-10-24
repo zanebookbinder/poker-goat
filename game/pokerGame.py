@@ -15,10 +15,17 @@ class PokerGame():
 			self.gameState.startNewHand()
 			self.roundOfBetting([])
 
-			if len(self.gameState.getActivePlayers()) > 1:
+			if len(self.gameState.getActivePlayers()) > 1: # if more than one player remains
 				self.roundOfBetting(self.gameState.sharedCards)
 
 			self.gameState.checkWinner()
+			self.assignRewards()
+			for playerIndex, gameExperiences in self.game_experiences.items():
+				print(playerIndex)
+				for gE in gameExperiences:
+					gE.summarizeGameExperience()
+			self.gameState.summarizeGame()
+			return
 
 		self.gameState.summarizeGame()
 
@@ -55,20 +62,7 @@ class PokerGame():
 
 		action = player.chooseAction(commonCards, playerOptions)
 
-		if action == 'raise':
-			# print("RAISE with cards:", [card.rank for card in player.hand.cards + sharedCards])
-			self.gameState.bet(playerIndex, self.bet_amount * 2)
-
-		if action == 'bet':
-			self.gameState.bet(playerIndex, self.bet_amount)
-
-		# if action == 'check':
-		# 	return
-
-		if action == 'fold':
-			self.gameState.fold(playerIndex)
-		
-		# round, bettingLevel, pot, holeCards, commonCards
+		# CREATE A GAME EXPERIENCE BASED ON THIS SITUATIONS
 		newGameExperience = gameExperience(
 			self.gameState.round,
 			self.gameState.currentRoundBet,
@@ -79,6 +73,39 @@ class PokerGame():
 
 		# PROBABLY NEED TO TURN THESE ACTIONS INTO INDICES IN A LIST??
 		newGameExperience.setActionTaken(action)
+
+		if self.gameState.round > 1: # if not in the first round
+			mostRecentExperience = self.game_experiences[playerIndex][-1]
+			mostRecentExperience.setNextGameExperience(newGameExperience)
+
+		self.game_experiences[playerIndex].append(newGameExperience)
+
+
+		## CARRY OUT CHOSEN ACTION ##
+		if action == 'raise':
+			self.gameState.bet(playerIndex, self.bet_amount * 2)
+
+		if action == 'bet':
+			self.gameState.bet(playerIndex, self.bet_amount)
+
+		if action == 'check':
+			return
+
+		if action == 'fold':
+			self.gameState.fold(playerIndex)
+
+	def assignRewards(self):
+		rewards = []
+
+		# create a list of player rewards (chip win/loss this hand)
+		for i, startingAmount in enumerate(self.gameState.startingChipAmounts):
+			rewards.append(self.gameState.players[i].chipCount - startingAmount)
+
+		# assign these rewards to their most recent game experiences
+		# otherwise, the reward will remain at its default value of 0
+		for i in range(len(self.gameState.players)):
+			mostRecentExperience = self.game_experiences[i][-1]
+			mostRecentExperience.setGameReward(rewards[i])
 		
 def main():
 	player1 = Player('Rahul', 0,  100)

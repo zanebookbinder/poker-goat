@@ -1,4 +1,4 @@
-
+from collections import defaultdict
 	
 class gameExperience():
 	def __init__(self, round, bettingLevel, pot, holeCards, commonCards):
@@ -8,31 +8,32 @@ class gameExperience():
 		self.holeCards = None
 		self.commonCards = None
 		self.suitMode = None
-		self.nextGameState = None
+		self.nextGameExperience = None
+		self.reward = 0
 
 		self.convertCardsIntoModelInput(holeCards, commonCards)
 	
 	def convertCardsIntoModelInput(self, holeCardObjects, commonCardObjects):
-        playerHandCards = [0] * 13
-        suitCounts = collections.defaultdict(int)
+		playerHandCards = [0] * 13
+		suitCounts = defaultdict(int)
 
-        for card in holeCardObjects:
-            cardRank = card.rank
-            playerHandCards[cardRank-2] += 1
-            suitCounts[card.suit] += 1
+		for card in holeCardObjects:
+			cardRank = card.rank
+			playerHandCards[cardRank-2] += 1
+			suitCounts[card.suit] += 1
 
-        commonCards = [0] * 13
-        for card in commonCardObjects:
-            cardRank = card.rank
-            commonCards[cardRank-2] += 1
-            suitCounts[card.suit] += 1
+		commonCards = [0] * 13
+		for card in commonCardObjects:
+			cardRank = card.rank
+			commonCards[cardRank-2] += 1
+			suitCounts[card.suit] += 1
 
-        self.suitMode = max(suitCounts.values())
+		self.suitMode = max(suitCounts.values())
 		self.holeCards = playerHandCards
 		self.commonCards = commonCards
 
-	def addNextGameState(self, nextGameState):
-		self.nextGameState = nextGameState
+	def setNextGameExperience(self, nextGameExperience):
+		self.nextGameExperience = nextGameExperience
 
 	def setGameReward(self, reward):
 		self.reward = reward
@@ -51,6 +52,9 @@ class gameExperience():
 				self.pot,
 			],
 			self.action,
-			self.nextGameState,
+			self.nextGameExperience,
 			self.reward
 		)
+
+	def summarizeGameExperience(self):
+		print(self.getRLInfo())

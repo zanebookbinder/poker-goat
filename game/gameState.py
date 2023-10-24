@@ -9,6 +9,7 @@ class GameState():
 		self.ante = start_ante
 
 	def startNewHand(self):
+		self.startingChipAmounts = [player.chipCount for player in self.players]
 		self.sharedCards = []
 		self.pot = 0
 		for player in self.players:
