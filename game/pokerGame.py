@@ -1,11 +1,14 @@
 from gameState import GameState
 from player import Player
+from collections import defaultdict
+from gameExperience import gameExperience
 
 class PokerGame():
 	def __init__(self, players, start_ante, bet_amount):
 		self.start_ante = start_ante
 		self.gameState = GameState(players, start_ante)
 		self.bet_amount = bet_amount
+		self.game_experiences = defaultdict(list)
 
 	def playSimplePoker(self):
 		for _ in range(50):
@@ -14,6 +17,7 @@ class PokerGame():
 
 			if len(self.gameState.getActivePlayers()) > 1:
 				self.roundOfBetting(self.gameState.sharedCards)
+
 			self.gameState.checkWinner()
 
 		self.gameState.summarizeGame()
@@ -37,7 +41,7 @@ class PokerGame():
 					# print("PLAYER", i, "HAS TO CALL OR FOLD")
 					self.playerTurn(player, sharedCards)
 
-	def playerTurn(self, player, sharedCards, options = ['bet', 'check', 'fold', 'raise']):
+	def playerTurn(self, player, commonCards, options = ['bet', 'check', 'fold', 'raise']):
 		playerOptions = options[:]
 		playerIndex = player.index
 
@@ -49,7 +53,7 @@ class PokerGame():
 		if self.gameState.currentRoundBet:
 			playerOptions.remove('check')
 
-		action = player.chooseAction(sharedCards, playerOptions)
+		action = player.chooseAction(commonCards, playerOptions)
 
 		if action == 'raise':
 			# print("RAISE with cards:", [card.rank for card in player.hand.cards + sharedCards])
@@ -58,11 +62,23 @@ class PokerGame():
 		if action == 'bet':
 			self.gameState.bet(playerIndex, self.bet_amount)
 
-		if action == 'check':
-			return
+		# if action == 'check':
+		# 	return
 
 		if action == 'fold':
 			self.gameState.fold(playerIndex)
+		
+		# round, bettingLevel, pot, holeCards, commonCards
+		newGameExperience = gameExperience(
+			self.gameState.round,
+			self.gameState.currentRoundBet,
+			self.gameState.pot,
+			player.hand.cards,
+			commonCards
+		)
+
+		# PROBABLY NEED TO TURN THESE ACTIONS INTO INDICES IN A LIST??
+		newGameExperience.setActionTaken(action)
 		
 def main():
 	player1 = Player('Rahul', 0,  100)

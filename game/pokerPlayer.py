@@ -31,6 +31,18 @@ class pokerPlayer(player):
         self.model.train_on_batch(loss)
         return prediction
 
+    def reward(holeCards, commonCards, action):
+        probWin = scoreHand(holeCards, commonCards)
+        if action == "fold":
+            return 1 - 2 * probWin
+        elif action == "check":
+            # why is this passing??
+            pass
+        elif action == "bet":
+            return -1 + 2 * probWin
+        elif action == "raise":
+            pass
+
     def getModelInput(self, player, sharedCards):
         playerHandCards = [0] * 13
         suitCounts = collections.defaultdict(int)
@@ -58,21 +70,3 @@ class pokerPlayer(player):
         model.add(Dense(16, activation = "relu"))
         model.add(Dense(8, activation = "relu"))
         model.add(Dense(3, activation  = "softmax"))
-
-    def reward(holeCards, commonCards, action):
-        probWin = scoreHand(holeCards, commonCards)
-        if action == "fold":
-            return 1 - 2 * probWin
-        elif action == "check":
-            # why is this passing??
-            pass
-        elif action == "bet":
-            return -1 + 2 * probWin
-        elif action == "raise":
-            pass
-
-
-
-    
-
-
