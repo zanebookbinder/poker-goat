@@ -31,7 +31,7 @@ class pokerPlayer(player):
         self.model.train_on_batch(loss)
         return prediction
 
-    def reward(holeCards, commonCards, action):
+    def reward(self, holeCards, commonCards, action):
         probWin = scoreHand(holeCards, commonCards)
         if action == "fold":
             return 1 - 2 * probWin
@@ -61,7 +61,7 @@ class pokerPlayer(player):
         suitMode = max(suitCounts.values())
         return [self.round] + playerHandCards + commonCards + [suitMode]
 
-    def createModel():
+    def createModel(self):
         model = Sequential()
         model.add(Dense(64, input_dim=28, activation= 'sigmoid'))
         model.add(Dense(128, activation = "relu"))
@@ -70,3 +70,4 @@ class pokerPlayer(player):
         model.add(Dense(16, activation = "relu"))
         model.add(Dense(8, activation = "relu"))
         model.add(Dense(3, activation  = "softmax"))
+        self.model = model

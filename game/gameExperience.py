@@ -14,10 +14,11 @@ class gameExperience():
 		self.convertCardsIntoModelInput(holeCards, commonCards)
 	
 	def convertCardsIntoModelInput(self, holeCardObjects, commonCardObjects):
+		
 		playerHandCards = [0] * 13
 		suitCounts = defaultdict(int)
 
-		for card in holeCardObjects:
+		for card in holeCardObjects: #just use self.holeCards? doing this changed stuff in output so maybe not
 			cardRank = card.rank
 			playerHandCards[cardRank-2] += 1
 			suitCounts[card.suit] += 1

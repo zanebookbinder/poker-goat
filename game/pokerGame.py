@@ -20,10 +20,10 @@ class PokerGame():
 
 			self.gameState.checkWinner()
 			self.assignRewards()
-			for playerIndex, gameExperiences in self.game_experiences.items():
+			for playerIndex, gameExperiences in self.game_experiences.items(): 
 				print(playerIndex)
-				for gE in gameExperiences:
-					gE.summarizeGameExperience()
+				for gE in gameExperiences: 
+					gE.summarizeGameExperience() 
 			self.gameState.summarizeGame()
 			return
 
@@ -106,6 +106,25 @@ class PokerGame():
 		for i in range(len(self.gameState.players)):
 			mostRecentExperience = self.game_experiences[i][-1]
 			mostRecentExperience.setGameReward(rewards[i])
+
+	def expToFile(self):
+		#maybe adapt this to pandas CSV? whatever experience replay in tensorflow requires
+		try:
+			output_file = open("experiences.txt", "x") 
+		except(FileExistsError):
+			output_file = open("experiences.txt", "w")
+		for player, exp in self.game_experiences.items():
+			output_file.write("Player " + str(player) + " experiences" + "\n" + "-" * 50 + "\n")
+			output_file.write("State	|	Action	|	Next State	|	Reward	\n")
+			for gE in exp: 
+				expTuple = gE.getRLInfo()
+				for data in expTuple:
+					output_file.write(str(data) + "\t")
+				output_file.write("\n")
+				self.gameState.summarizeGame()
+			output_file.write("=" * 50 + "\n")
+		output_file.close()
+
 		
 def main():
 	player1 = Player('Rahul', 0,  100)
@@ -114,6 +133,7 @@ def main():
 	betAmount = 10
 	pg = PokerGame([player1, player2], ante, betAmount)
 	pg.playSimplePoker()
+	pg.expToFile()
 	
 if __name__ == '__main__':
 	main()
