@@ -42,35 +42,26 @@ class gameExperience():
 	def setActionTaken(self, action):
 		self.action = action
 
-	def getRLInfo(self, json=False):
-		nextExperience = self.nextGameExperience.getRLInfo(json) if self.nextGameExperience else None
-	
-		if not json:
-			return (
-				self.holeCards + \
-				self.commonCards + \
-				[
-					self.suitMode, 
-					self.round,
-					self.bettingLevel,
-					self.pot,
-				],
-				self.action,
-				nextExperience,
-				self.reward
-			)
-		else:
-			return {
-				'holeCards': self.holeCards,
-				'commonCards': self.commonCards,
-				'suitMode': self.suitMode,
-				'round': self.round,
-				'bettingLevel': self.bettingLevel,
-				'pot': self.pot,
-				'actionTaken': self.action,
-				'nextExperience': nextExperience,
-				'reward': self.reward
-			}
+	def getState(self):
+		return \
+			self.holeCards + \
+			self.commonCards + \
+			[
+				self.suitMode, 
+				self.round,
+				self.bettingLevel,
+				self.pot,
+			]
+
+	def getRLInfo(self):
+		nextState = self.nextGameExperience.getState() if self.nextGameExperience else []
+		
+		return [
+			self.getState(),
+			self.action,
+			nextState,
+			self.reward
+		]
 
 	def summarizeGameExperience(self):
 		print(self.getRLInfo())

@@ -2,37 +2,31 @@ from gameState import GameState
 from player import Player
 from collections import defaultdict
 from gameExperience import gameExperience
-import os
+from model import Model
 import json
 
-
 class PokerGame:
-    def __init__(self, players, start_ante, bet_amount):
+    def __init__(self, model, players, start_ante, bet_amount):
+        self.model = model
         self.start_ante = start_ante
         self.gameState = GameState(players, start_ante)
         self.bet_amount = bet_amount
         self.game_experiences = defaultdict(list)
 
     def playSimplePoker(self):
-        for _ in range(50):
+        while sum(len(lst) for lst in self.game_experiences.values()) < 50:
             self.gameState.startNewHand()
             self.roundOfBetting([])
 
-            if (
-                len(self.gameState.getActivePlayers()) > 1
-            ):  # if more than one player remains
+            if (len(self.gameState.getActivePlayers()) > 1):  # if more than one player remains
                 self.roundOfBetting(self.gameState.sharedCards)
 
             self.gameState.checkWinner()
             self.assignRewards()
-            for playerIndex, gameExperiences in self.game_experiences.items():
-                print(playerIndex)
-                for gE in gameExperiences:
-                    gE.summarizeGameExperience()
-            self.gameState.summarizeGame()
-            return
 
+        self.expToFile()
         self.gameState.summarizeGame()
+        self.model.trainModel()
 
     def roundOfBetting(self, sharedCards):
         self.gameState.startNewRound()
@@ -63,16 +57,12 @@ class PokerGame:
         playerIndex = player.index
 
         # don't fold or raise if not current bet (checking dominates folding)
-        if not self.gameState.currentRoundBet:
-            playerOptions.remove("fold")
-
-        # can't check if there is already a bet
         if self.gameState.currentRoundBet:
             playerOptions.remove("check")
+        else: # can't check if there is already a bet
+            playerOptions.remove("fold")
 
-        action = player.chooseAction(commonCards, playerOptions)
-
-        # CREATE A GAME EXPERIENCE BASED ON THIS SITUATIONS
+        # CREATE A GAME EXPERIENCE BASED ON THIS SITUATION
         newGameExperience = gameExperience(
             self.gameState.round,
             self.gameState.currentRoundBet,
@@ -81,7 +71,7 @@ class PokerGame:
             commonCards,
         )
 
-        # PROBABLY NEED TO TURN THESE ACTIONS INTO INDICES IN A LIST??
+        action = self.model.chooseBestAction(newGameExperience)
         newGameExperience.setActionTaken(action)
 
         if self.gameState.round > 1:  # if not in the first round
@@ -91,17 +81,17 @@ class PokerGame:
         self.game_experiences[playerIndex].append(newGameExperience)
 
         ## CARRY OUT CHOSEN ACTION ##
-        if action == "raise":
+        if action == 2:
             self.gameState.bet(playerIndex, self.bet_amount * 2)
 
-        if action == "bet":
+        if action == 1:
             self.gameState.bet(playerIndex, self.bet_amount)
 
-        if action == "check":
-            return
-
-        if action == "fold":
-            self.gameState.fold(playerIndex)
+        if not action:
+            if self.gameState.currentRoundBet: # fold
+                self.gameState.fold(playerIndex)
+            else: # check
+                return
 
     def assignRewards(self):
         rewards = []
@@ -118,39 +108,22 @@ class PokerGame:
 
     def expToFile(self, fileName="experiences.json"):
         gameExperiences = [gE for sublist in self.game_experiences.values() for gE in sublist]
-        jsonOutput = [gE.getRLInfo(json=True) for gE in gameExperiences]
+        jsonOutput = [gE.getRLInfo() for gE in gameExperiences]
         
         with open(fileName, 'r') as file:
             previousExperiences = json.load(file)
         previousExperiences.extend(jsonOutput)
-        
+
         with open(fileName, 'w') as file:
             json.dump(previousExperiences, file)
 
-        # maybe adapt this to pandas CSV? whatever experience replay in tensorflow requires
-        # try:
-        # 	output_file = open("experiences.txt", "x")
-        # except(FileExistsError):
-        # 	output_file = open("experiences.txt", "w")
-        # for player, exp in self.game_experiences.items():
-        # 	output_file.write("Player " + str(player) + " experiences" + "\n" + "-" * 50 + "\n")
-        # 	output_file.write("State	|	Action	|	Next State	|	Reward	\n")
-        # 	for gE in exp:
-        # 		expTuple = gE.getRLInfo()
-        # 		for data in expTuple:
-        # 			output_file.write(str(data) + "\t")
-        # 		output_file.write("\n")
-        # 		self.gameState.summarizeGame()
-        # 	output_file.write("=" * 50 + "\n")
-        # output_file.close()
-
-
 def main():
+    model = Model()
     player1 = Player("Rahul", 0, 100)
     player2 = Player("Zane", 1, 100)
     ante = 5
     betAmount = 10
-    pg = PokerGame([player1, player2], ante, betAmount)
+    pg = PokerGame(model, [player1, player2], ante, betAmount)
     pg.playSimplePoker()
     pg.expToFile()
 
