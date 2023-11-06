@@ -4,17 +4,25 @@ from collections import defaultdict
 from gameExperience import gameExperience
 from model import Model
 import json
+from constants import BATCH_SIZE, TOTAL_BUFFER_SIZE
 
 class PokerGame:
-    def __init__(self, model, players, start_ante, bet_amount):
-        self.model = model
+    def __init__(self, load_model, players, start_ante, bet_amount):
+        self.model = Model(load_model=load_model)
         self.start_ante = start_ante
         self.gameState = GameState(players, start_ante)
         self.bet_amount = bet_amount
         self.game_experiences = defaultdict(list)
+        self.experiences_counter = 0
+
+        for _ in range(15):
+            self.playSimplePoker()
+            self.model.trainModel()
+            self.experiences_counter = 0
+            self.expToFile()
 
     def playSimplePoker(self):
-        while sum(len(lst) for lst in self.game_experiences.values()) < 50:
+        while self.experiences_counter < BATCH_SIZE:
             self.gameState.startNewHand()
             self.roundOfBetting([])
 
@@ -23,10 +31,6 @@ class PokerGame:
 
             self.gameState.checkWinner()
             self.assignRewards()
-
-        self.expToFile()
-        self.gameState.summarizeGame()
-        self.model.trainModel()
 
     def roundOfBetting(self, sharedCards):
         self.gameState.startNewRound()
@@ -79,6 +83,7 @@ class PokerGame:
             mostRecentExperience.setNextGameExperience(newGameExperience)
 
         self.game_experiences[playerIndex].append(newGameExperience)
+        self.experiences_counter += 1
 
         ## CARRY OUT CHOSEN ACTION ##
         if action == 2:
@@ -112,20 +117,25 @@ class PokerGame:
         
         with open(fileName, 'r') as file:
             previousExperiences = json.load(file)
+        
+        totalBufferSize = TOTAL_BUFFER_SIZE
         previousExperiences.extend(jsonOutput)
+        previousExperiences = previousExperiences[-totalBufferSize:]
 
         with open(fileName, 'w') as file:
             json.dump(previousExperiences, file)
 
 def main():
-    model = Model()
     player1 = Player("Rahul", 0, 100)
     player2 = Player("Zane", 1, 100)
     ante = 5
     betAmount = 10
-    pg = PokerGame(model, [player1, player2], ante, betAmount)
-    pg.playSimplePoker()
-    pg.expToFile()
+    pg = PokerGame(
+        load_model=True,
+        players=[player1, player2],
+        start_ante=ante,
+        bet_amount=betAmount
+    )
 
 
 if __name__ == "__main__":

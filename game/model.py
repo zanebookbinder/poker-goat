@@ -1,27 +1,36 @@
 import numpy as np
 import random
-from keras.models import Sequential
+from keras.models import Sequential, load_model
 from keras.layers import Dense
+import os
 from utils import readExperiencesFile
-import tensorflow as tf
+from constants import BATCH_SIZE
 
 class Model():
-    def __init__(self, model=None):
-        if not model:
-            self.createModel()
+    def __init__(self, load_model=False):
+        if load_model:
+            self.model = self.loadModelFromFile()
+            print(self.model.weights)
         else:
-            self.model = model
+            self.createModel()
+
+        self.model_iteration = 0
 
     def chooseBestAction(self, gameExperience):
         modelInput = np.array(gameExperience.getState()).reshape(1, -1)
         
-        bestAction = self.model.predict(modelInput)
+        bestAction = self.model.predict(modelInput, verbose=0)
         # returns [x, y, z] where:
         # x + y + z = 1
         # x --> check/fold
         # y --> bet
         # z --> raise
+
+        # print('State:', str(gameExperience.getState()))
+        # print('Action:', int(np.argmax(bestAction)))
+        # print(bestAction, int(np.argmax(bestAction)))
     
+        print(bestAction, int(np.argmax(bestAction)))
         return int(np.argmax(bestAction))
 
     def createModel(self):
@@ -36,15 +45,27 @@ class Model():
         model.compile(loss="mse", optimizer="Adam")
         self.model = model
 
-    def saveModel(self):
-        self.model.save("playerModel.keras")
+    def saveModel(self, file_name = "model.keras"):
+        self.model.save(file_name)
+
+    def loadModelFromFile(self):
+        model_dir = './models'
+        model_files = [f for f in os.listdir(model_dir) if f.endswith('.keras')]
+        model_files.sort(key = lambda x: int(x.replace('model_', '').replace('.keras', '')))
+
+        if model_files:
+            # Load the highest-verion model
+            largest_model_file = model_files[-1]
+            return load_model(os.path.join(model_dir, largest_model_file))
+        else:
+            print("No model files found in the directory")
 
     def trainModel(self):
         experiences = readExperiencesFile()
 
-        # with replacement???
-        sample_size = 10
-        samples = [random.choice(experiences) for _ in range(sample_size)]
+        # sample without replacement
+        sample_size = int(BATCH_SIZE / 2)
+        samples = random.sample(experiences, sample_size)
 
         x = np.empty((sample_size, 30))
         YTarget = np.empty((sample_size, 3))
@@ -56,17 +77,16 @@ class Model():
                 Qmax = 0
             else:
                 nextState = np.array(nextState).reshape(1, -1)
-                QPrimeOutput = self.model.predict(nextState)[0]
+                QPrimeOutput = self.model.predict(nextState, verbose=0)[0]
                 Qmax = max(QPrimeOutput)
             
-            prediction = self.model.predict(state2D)[0]
+            prediction = self.model.predict(state2D, verbose=0)[0]
             y_actual = prediction.copy()
             y_actual[action] = Qmax + reward
             
             YTarget[i] = y_actual
 
-        print(x)
-        print('----')
-        print(YTarget)
+        self.model.fit(x, YTarget) 
 
-        self.model.fit(x, YTarget)            
+        self.saveModel(file_name='models/model_' + str(self.model_iteration) + '.keras')
+        self.model_iteration += 1          

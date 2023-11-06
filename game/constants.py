@@ -1,3 +1,6 @@
+BATCH_SIZE = 500
+TOTAL_BUFFER_SIZE = 10 * BATCH_SIZE
+
 dealSystem = [
 	2
 ]
