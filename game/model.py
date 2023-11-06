@@ -3,20 +3,23 @@ import random
 from keras.models import Sequential, load_model
 from keras.layers import Dense
 import os
-from utils import readExperiencesFile
-from constants import BATCH_SIZE
+from utils import readExperiencesFile, expToFile
+from constants import BATCH_SIZE, ALPHA
 
 class Model():
     def __init__(self, load_model=False):
         if load_model:
             self.model = self.loadModelFromFile()
-            print(self.model.weights)
         else:
             self.createModel()
 
         self.model_iteration = 0
 
     def chooseBestAction(self, gameExperience):
+        # random action with probability ALPHA
+        if random.random() < ALPHA:
+            return random.choice([0,1,2])
+
         modelInput = np.array(gameExperience.getState()).reshape(1, -1)
         
         bestAction = self.model.predict(modelInput, verbose=0)
@@ -29,8 +32,8 @@ class Model():
         # print('State:', str(gameExperience.getState()))
         # print('Action:', int(np.argmax(bestAction)))
         # print(bestAction, int(np.argmax(bestAction)))
-    
-        print(bestAction, int(np.argmax(bestAction)))
+        # print(bestAction[0], int(np.argmax(bestAction)))
+
         return int(np.argmax(bestAction))
 
     def createModel(self):
@@ -66,6 +69,9 @@ class Model():
         # sample without replacement
         sample_size = int(BATCH_SIZE / 2)
         samples = random.sample(experiences, sample_size)
+
+        new_experiences = [e for e in experiences if e not in samples]
+        expToFile(new_experiences)
 
         x = np.empty((sample_size, 30))
         YTarget = np.empty((sample_size, 3))

@@ -3,7 +3,7 @@ from player import Player
 from collections import defaultdict
 from gameExperience import gameExperience
 from model import Model
-import json
+from utils import expToFile
 from constants import BATCH_SIZE, TOTAL_BUFFER_SIZE
 
 class PokerGame:
@@ -19,7 +19,9 @@ class PokerGame:
             self.playSimplePoker()
             self.model.trainModel()
             self.experiences_counter = 0
-            self.expToFile()
+            gameExperiences = [gE.getRLInfo() for sublist in self.game_experiences.values() for gE in sublist]
+            
+            expToFile(gameExperiences)
 
     def playSimplePoker(self):
         while self.experiences_counter < BATCH_SIZE:
@@ -111,32 +113,17 @@ class PokerGame:
             mostRecentExperience = self.game_experiences[i][-1]
             mostRecentExperience.setGameReward(rewards[i])
 
-    def expToFile(self, fileName="experiences.json"):
-        gameExperiences = [gE for sublist in self.game_experiences.values() for gE in sublist]
-        jsonOutput = [gE.getRLInfo() for gE in gameExperiences]
-        
-        with open(fileName, 'r') as file:
-            previousExperiences = json.load(file)
-        
-        totalBufferSize = TOTAL_BUFFER_SIZE
-        previousExperiences.extend(jsonOutput)
-        previousExperiences = previousExperiences[-totalBufferSize:]
-
-        with open(fileName, 'w') as file:
-            json.dump(previousExperiences, file)
-
 def main():
     player1 = Player("Rahul", 0, 100)
     player2 = Player("Zane", 1, 100)
     ante = 5
     betAmount = 10
     pg = PokerGame(
-        load_model=True,
+        load_model=False,
         players=[player1, player2],
         start_ante=ante,
         bet_amount=betAmount
     )
-
 
 if __name__ == "__main__":
     main()
