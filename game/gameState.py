@@ -47,7 +47,7 @@ class GameState():
 	def bet(self, playerIndex, amount):
 		self.players[playerIndex].bet(amount)
 		self.pot += amount
-		self.currentRoundBet = max(self.currentRoundBet, amount)
+		self.currentRoundBet = max(self.currentRoundBet, self.players[playerIndex].currentBet)
 
 	def fold(self, playerIndex):
 		self.players[playerIndex].folded = True

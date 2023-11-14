@@ -18,21 +18,20 @@ class PokerGame:
 
         self.actionFrequencies = [0,0,0]
 
-        for i in range(15):
+        for i in range(30):
             print(i)
             self.playSimplePoker()
             gameExperiences = [gE.getRLInfo() for sublist in self.game_experiences.values() for gE in sublist]
             expToFile(gameExperiences)
 
             self.model.trainModel()
-            self.epsilon *= 0.9
             self.experiences_counter = 0
 
             print(self.actionFrequencies)
             self.actionFrequencies = [0,0,0]
             
     def playSimplePoker(self):
-        while self.experiences_counter < 5:
+        while self.experiences_counter < BATCH_SIZE:
             self.gameState.startNewHand()
             self.roundOfBetting([])
 
@@ -41,41 +40,37 @@ class PokerGame:
 
             self.gameState.checkWinner()
             self.assignRewards()
-            self.gameState.summarizeGame()
+            # self.gameState.summarizeGame()
 
     def roundOfBetting(self, sharedCards):
         self.gameState.startNewRound()
 
         # ask everyone if they want to bet
-        for i in range(len(self.gameState.players)):
-            player = self.gameState.players[i]
-            if player.folded:
-                continue
-
+        for player in self.gameState.getActivePlayers():
             self.playerTurn(player, sharedCards)
 
+        activePlayerBets = [p.currentBet for p in self.gameState.getActivePlayers()]
+        
         # if someone bet later on, go back through and make the other players bet or fold
-        if self.gameState.currentRoundBet:
-            for i in range(len(self.gameState.players)):
-                player = self.gameState.players[i]
+        # if self.gameState.currentRoundBet:
+        while len(set(activePlayerBets)) > 1:
+            # for i in range(len(self.gameState.players)):
+            for player in self.gameState.getActivePlayers():
+                # player = self.gameState.players[i]
                 if (
-                    not player.folded
-                    and player.currentBet < self.gameState.currentRoundBet
+                    # not player.folded
+                    # and 
+                    player.currentBet < self.gameState.currentRoundBet
                 ):
                     # print("PLAYER", i, "HAS TO CALL OR FOLD")
                     self.playerTurn(player, sharedCards)
 
-    def playerTurn(
-        self, player, commonCards, options=["bet", "check", "fold", "raise"]
-    ):
-        playerOptions = options[:]
-        playerIndex = player.index
+            activePlayerBets = [p.currentBet for p in self.gameState.getActivePlayers()]
 
-        # don't fold or raise if not current bet (checking dominates folding)
-        if self.gameState.currentRoundBet:
-            playerOptions.remove("check")
-        else: # can't check if there is already a bet
-            playerOptions.remove("fold")
+    def playerTurn(
+        self, player, commonCards
+    ):
+        playerIndex = player.index
 
         # CREATE A GAME EXPERIENCE BASED ON THIS SITUATION
         newGameExperience = gameExperience(
@@ -87,6 +82,10 @@ class PokerGame:
         )
 
         action = self.model.chooseBestAction(self.epsilon, newGameExperience)
+        
+        # epsilon decay
+        self.epsilon *= 0.99995
+
         self.actionFrequencies[action] += 1
         newGameExperience.setActionTaken(action)
 
@@ -98,13 +97,13 @@ class PokerGame:
         self.experiences_counter += 1
 
         ## CARRY OUT CHOSEN ACTION ##
-        if action == 2:
+        if action == 2: # raise
             self.gameState.bet(playerIndex, self.bet_amount * 2)
 
-        if action == 1:
+        if action == 1: # bet
             self.gameState.bet(playerIndex, self.bet_amount)
 
-        if not action:
+        if not action: # check if no pot, fold if pot
             if self.gameState.currentRoundBet: # fold
                 self.gameState.fold(playerIndex)
             else: # check

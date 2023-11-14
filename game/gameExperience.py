@@ -1,4 +1,5 @@
 from collections import defaultdict
+from constants import REWARD_NORM
 	
 class gameExperience():
 	def __init__(self, round, bettingLevel, pot, holeCards, commonCards):
@@ -37,7 +38,7 @@ class gameExperience():
 		self.nextGameExperience = nextGameExperience
 
 	def setGameReward(self, reward):
-		self.reward = reward
+		self.reward = reward / REWARD_NORM
 
 	def setActionTaken(self, action):
 		self.action = action
@@ -49,8 +50,8 @@ class gameExperience():
 			[
 				self.suitMode, 
 				self.round,
-				self.bettingLevel,
-				self.pot,
+				self.bettingLevel / ,
+				self.pot / REWARD_NORM,
 			]
 
 	def getRLInfo(self):
