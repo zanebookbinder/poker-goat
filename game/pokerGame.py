@@ -4,7 +4,7 @@ from collections import defaultdict
 from gameExperience import gameExperience
 from model import Model
 from utils import expToFile
-from constants import BATCH_SIZE, TOTAL_BUFFER_SIZE
+from constants import BATCH_SIZE, TOTAL_BUFFER_SIZE, STARTING_EPSILON
 
 class PokerGame:
     def __init__(self, load_model, players, start_ante, bet_amount):
@@ -14,17 +14,25 @@ class PokerGame:
         self.bet_amount = bet_amount
         self.game_experiences = defaultdict(list)
         self.experiences_counter = 0
+        self.epsilon = STARTING_EPSILON
 
-        for _ in range(15):
+        self.actionFrequencies = [0,0,0]
+
+        for i in range(15):
+            print(i)
             self.playSimplePoker()
-            self.model.trainModel()
-            self.experiences_counter = 0
             gameExperiences = [gE.getRLInfo() for sublist in self.game_experiences.values() for gE in sublist]
-            
             expToFile(gameExperiences)
 
+            self.model.trainModel()
+            self.epsilon *= 0.9
+            self.experiences_counter = 0
+
+            print(self.actionFrequencies)
+            self.actionFrequencies = [0,0,0]
+            
     def playSimplePoker(self):
-        while self.experiences_counter < BATCH_SIZE:
+        while self.experiences_counter < 5:
             self.gameState.startNewHand()
             self.roundOfBetting([])
 
@@ -33,6 +41,7 @@ class PokerGame:
 
             self.gameState.checkWinner()
             self.assignRewards()
+            self.gameState.summarizeGame()
 
     def roundOfBetting(self, sharedCards):
         self.gameState.startNewRound()
@@ -77,7 +86,8 @@ class PokerGame:
             commonCards,
         )
 
-        action = self.model.chooseBestAction(newGameExperience)
+        action = self.model.chooseBestAction(self.epsilon, newGameExperience)
+        self.actionFrequencies[action] += 1
         newGameExperience.setActionTaken(action)
 
         if self.gameState.round > 1:  # if not in the first round
@@ -114,10 +124,10 @@ class PokerGame:
             mostRecentExperience.setGameReward(rewards[i])
 
 def main():
-    player1 = Player("Rahul", 0, 100)
-    player2 = Player("Zane", 1, 100)
-    ante = 5
-    betAmount = 10
+    player1 = Player("Rahul", 0, 0)
+    player2 = Player("Zane", 1, 0)
+    ante = 1
+    betAmount = 2
     pg = PokerGame(
         load_model=False,
         players=[player1, player2],

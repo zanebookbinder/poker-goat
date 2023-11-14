@@ -4,7 +4,7 @@ from keras.models import Sequential, load_model
 from keras.layers import Dense
 import os
 from utils import readExperiencesFile, expToFile
-from constants import BATCH_SIZE, ALPHA
+from constants import BATCH_SIZE
 
 class Model():
     def __init__(self, load_model=False):
@@ -15,9 +15,9 @@ class Model():
 
         self.model_iteration = 0
 
-    def chooseBestAction(self, gameExperience):
-        # random action with probability ALPHA
-        if random.random() < ALPHA:
+    def chooseBestAction(self, epsilon, gameExperience):
+        # random action with probability EPSILON
+        if random.random() < epsilon:
             return random.choice([0,1,2])
 
         modelInput = np.array(gameExperience.getState()).reshape(1, -1)
@@ -44,7 +44,7 @@ class Model():
         model.add(Dense(32, activation = "relu"))
         model.add(Dense(16, activation = "relu"))
         model.add(Dense(8, activation = "relu"))
-        model.add(Dense(3, activation  = "softmax"))
+        model.add(Dense(3, activation  = "linear"))
         model.compile(loss="mse", optimizer="Adam")
         self.model = model
 
