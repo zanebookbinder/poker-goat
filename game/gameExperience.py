@@ -50,7 +50,7 @@ class gameExperience():
 			[
 				self.suitMode, 
 				self.round,
-				self.bettingLevel / ,
+				self.bettingLevel / REWARD_NORM,
 				self.pot / REWARD_NORM,
 			]
 

@@ -11,12 +11,14 @@ class Player():
 		self.debugOutput = False
 		self.handWinCounter = 0
 		self.foldedCounter = 0
+		self.hasTakenATurnThisHand = False
 		self.startNewHand()
 
 	def startNewHand(self):
 		self.folded = False
 		self.currentBet = 0
 		self.hand = Hand()
+		self.hasTakenATurnThisHand  = False
 
 	def bet(self, amount):
 		self.currentBet += amount

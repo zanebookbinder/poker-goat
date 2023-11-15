@@ -4,7 +4,7 @@ from collections import defaultdict
 from gameExperience import gameExperience
 from model import Model
 from utils import expToFile
-from constants import BATCH_SIZE, TOTAL_BUFFER_SIZE, STARTING_EPSILON
+from constants import BATCH_SIZE, STARTING_EPSILON
 
 class PokerGame:
     def __init__(self, load_model, players, start_ante, bet_amount):
@@ -17,6 +17,10 @@ class PokerGame:
         self.epsilon = STARTING_EPSILON
 
         self.actionFrequencies = [0,0,0]
+        self.mostRecentActionRewards = [0,0,0]
+        self.wLByAction = [[0,0], [0,0,], [0,0]]
+        self.raiseFoldWins = 0
+        self.betFoldWins = 0
 
         for i in range(30):
             print(i)
@@ -26,49 +30,55 @@ class PokerGame:
 
             self.model.trainModel()
             self.experiences_counter = 0
-
-            print(self.actionFrequencies)
-            self.actionFrequencies = [0,0,0]
             
     def playSimplePoker(self):
+        self.handsPlayed = 0
         while self.experiences_counter < BATCH_SIZE:
+            self.handsPlayed += 1
             self.gameState.startNewHand()
             self.roundOfBetting([])
 
             if (len(self.gameState.getActivePlayers()) > 1):  # if more than one player remains
                 self.roundOfBetting(self.gameState.sharedCards)
 
-            self.gameState.checkWinner()
-            self.assignRewards()
+            winnerDict = self.gameState.checkWinner()
+            self.assignRewards(winnerDict)
             # self.gameState.summarizeGame()
+            # print('\n\n\n')
+
+        print('Hands played:', self.handsPlayed)
+        print('Most recent action rewards:', self.mostRecentActionRewards)
+        print('Action frequencies:', self.actionFrequencies)
+        print('Expected reward per action:', [self.mostRecentActionRewards[i] / self.actionFrequencies[i] for i in range(3)])
+        print('W,L by action:', self.wLByAction)
+        print('Total rewards:', sum([sum(self.wLByAction[i]) for i in range(3)]))
+        print('Raise-fold wins:', self.raiseFoldWins)
+        print('Bet-fold wins: ', self.betFoldWins)
+        
+        self.handsPlayed = 0
+        self.actionFrequencies = [0,0,0]
+        self.mostRecentActionRewards = [0,0,0]
+        self.wLByAction = [[0,0], [0,0,], [0,0]]
 
     def roundOfBetting(self, sharedCards):
         self.gameState.startNewRound()
 
         # ask everyone if they want to bet
         for player in self.gameState.getActivePlayers():
-            self.playerTurn(player, sharedCards)
+            self.playerTurn(player, sharedCards, False)
 
         activePlayerBets = [p.currentBet for p in self.gameState.getActivePlayers()]
         
         # if someone bet later on, go back through and make the other players bet or fold
-        # if self.gameState.currentRoundBet:
         while len(set(activePlayerBets)) > 1:
-            # for i in range(len(self.gameState.players)):
             for player in self.gameState.getActivePlayers():
-                # player = self.gameState.players[i]
-                if (
-                    # not player.folded
-                    # and 
-                    player.currentBet < self.gameState.currentRoundBet
-                ):
-                    # print("PLAYER", i, "HAS TO CALL OR FOLD")
-                    self.playerTurn(player, sharedCards)
+                if player.currentBet < self.gameState.currentRoundBet:
+                    self.playerTurn(player, sharedCards, False)
 
             activePlayerBets = [p.currentBet for p in self.gameState.getActivePlayers()]
 
     def playerTurn(
-        self, player, commonCards
+        self, player, commonCards, verbose=False
     ):
         playerIndex = player.index
 
@@ -89,27 +99,50 @@ class PokerGame:
         self.actionFrequencies[action] += 1
         newGameExperience.setActionTaken(action)
 
-        if self.gameState.round > 1:  # if not in the first round
+        # If there is a prior experience from this hand
+        if player.hasTakenATurnThisHand:
             mostRecentExperience = self.game_experiences[playerIndex][-1]
             mostRecentExperience.setNextGameExperience(newGameExperience)
 
         self.game_experiences[playerIndex].append(newGameExperience)
         self.experiences_counter += 1
 
+        amountToStayIn = self.gameState.currentRoundBet - player.currentBet
+        player.hasTakenATurnThisHand = True
+
         ## CARRY OUT CHOSEN ACTION ##
-        if action == 2: # raise
-            self.gameState.bet(playerIndex, self.bet_amount * 2)
+        if amountToStayIn > 0:
+            if action == 2: # raise on other players' bet
+                if verbose:
+                    print('raising on other players bet')
+                self.gameState.bet(playerIndex, amountToStayIn * 2)
 
-        if action == 1: # bet
-            self.gameState.bet(playerIndex, self.bet_amount)
+            elif action == 1: # call other players' bet
+                if verbose:
+                    print('calling other players bet')
+                self.gameState.bet(playerIndex, amountToStayIn)
 
-        if not action: # check if no pot, fold if pot
-            if self.gameState.currentRoundBet: # fold
+            elif not action: # fold
+                if verbose:
+                    print('would have to spent money to stay in, folding now')
                 self.gameState.fold(playerIndex)
-            else: # check
+        else:
+            if action == 2: # bet a lot
+                if verbose:
+                    print('betting a lot (didnt have to)')
+                self.gameState.bet(playerIndex, self.bet_amount * 2)
+
+            elif action == 1: # bet a little
+                if verbose:
+                    print('betting a little bit(didnt have to)')
+                self.gameState.bet(playerIndex, self.bet_amount)
+
+            elif not action: # check
+                if verbose:
+                    print('checking')
                 return
 
-    def assignRewards(self):
+    def assignRewards(self, winnerDict):
         rewards = []
 
         # create a list of player rewards (chip win/loss this hand)
@@ -120,7 +153,29 @@ class PokerGame:
         # otherwise, the reward will remain at its default value of 0
         for i in range(len(self.gameState.players)):
             mostRecentExperience = self.game_experiences[i][-1]
+            # mostRecentExperience.summarizeGameExperience()
             mostRecentExperience.setGameReward(rewards[i])
+            
+            actionTaken = mostRecentExperience.action
+            self.mostRecentActionRewards[actionTaken] += rewards[i]
+
+            if rewards[i] > 0:
+                self.wLByAction[actionTaken][0] += 1
+            elif rewards[i] < 0:
+                self.wLByAction[actionTaken][1] += 1
+
+            if actionTaken == 2:
+                mostRecentExperience.summarizeGameExperience()
+                print(winnerDict)
+                print('\n\n')
+
+                if 'wins as the only remaining player' in winnerDict.values():
+                    self.raiseFoldWins += 1
+
+            if actionTaken == 1:
+                if 'wins as the only remaining player' in winnerDict.values():
+                    self.betFoldWins += 1
+
 
 def main():
     player1 = Player("Rahul", 0, 0)
