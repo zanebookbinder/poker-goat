@@ -14,6 +14,9 @@ class Player():
 		self.hasTakenATurnThisHand = False
 		self.startNewHand()
 
+	def chooseBestAction(self, model, newGameExperience, commonCards):
+		return model.chooseBestAction(newGameExperience)
+
 	def startNewHand(self):
 		self.folded = False
 		self.currentBet = 0

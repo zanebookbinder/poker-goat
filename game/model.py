@@ -3,8 +3,9 @@ import random
 from keras.models import Sequential, load_model
 from keras.layers import Dense
 import os
-from utils import readExperiencesFile, expToFile
-from constants import BATCH_SIZE
+from utils import readExperiencesFile, expToFile, deleteFileContent
+from constants import BATCH_SIZE, STARTING_EPSILON, EPSILON_MULTIPLIER
+from model_tester import test_model
 
 class Model():
     def __init__(self, load_model=False):
@@ -12,12 +13,14 @@ class Model():
             self.model = self.loadModelFromFile()
         else:
             self.createModel()
+            deleteFileContent()
 
         self.model_iteration = 0
+        self.epsilon = STARTING_EPSILON
 
-    def chooseBestAction(self, epsilon, gameExperience):
+    def chooseBestAction(self, gameExperience):
         # random action with probability EPSILON
-        if random.random() < epsilon:
+        if random.random() < self.epsilon:
             return random.choice([0,1,2])
 
         modelInput = np.array(gameExperience.getState()).reshape(1, -1)
@@ -95,4 +98,7 @@ class Model():
         self.model.fit(x, YTarget) 
 
         self.saveModel(file_name='models/model_' + str(self.model_iteration) + '.keras')
-        self.model_iteration += 1          
+        self.model_iteration += 1     
+        self.epsilon *= EPSILON_MULTIPLIER  
+        test_model(self.model)  
+

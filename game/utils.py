@@ -14,3 +14,7 @@ def expToFile(gameExperiences, fileName="experiences.json"):
 
         with open(fileName, 'w') as file:
             json.dump(previousExperiences, file)
+
+def deleteFileContent(fileName="experiences.json"):
+      with open(fileName, 'w') as file:
+            json.dump([], file)
