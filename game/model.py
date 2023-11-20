@@ -5,7 +5,6 @@ from keras.layers import Dense
 import os
 from utils import readExperiencesFile, expToFile, deleteFileContent
 from constants import BATCH_SIZE, STARTING_EPSILON, EPSILON_MULTIPLIER
-from model_tester import test_model
 
 class Model():
     def __init__(self, load_model=False):
@@ -61,7 +60,7 @@ class Model():
 
         if model_files:
             # Load the highest-verion model
-            largest_model_file = model_files[-1]
+            largest_model_file = model_files[29]
             return load_model(os.path.join(model_dir, largest_model_file))
         else:
             print("No model files found in the directory")
@@ -99,6 +98,8 @@ class Model():
 
         self.saveModel(file_name='models/model_' + str(self.model_iteration) + '.keras')
         self.model_iteration += 1     
-        self.epsilon *= EPSILON_MULTIPLIER  
+        self.epsilon *= EPSILON_MULTIPLIER
+
+        from model_tester import test_model
         test_model(self.model)  
 

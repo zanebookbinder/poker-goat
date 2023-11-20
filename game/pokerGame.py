@@ -6,6 +6,7 @@ from model import Model
 from utils import expToFile
 from constants import BATCH_SIZE
 from smartPlayer import SmartPlayer
+import sys
 
 class PokerGame:
     def __init__(self, num_batches, load_model, players, start_ante, bet_amount):
@@ -172,15 +173,14 @@ class PokerGame:
                 if actionTaken == 1 and 'wins as the only remaining player' in winnerDict.values():
                     self.betFoldWins += 1
 
-def main():
+def main(num_batches):
     player1 = Player("Rahul", 0, 0)
     player2 = SmartPlayer("Zane", 1, 0)
     ante = 1
     betAmount = 2
-    num_batches = 30
 
     PokerGame(
-        num_batches=num_batches,
+        num_batches=int(num_batches),
         load_model=False,
         players=[player1, player2],
         start_ante=ante,
@@ -188,4 +188,4 @@ def main():
     )
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1])
