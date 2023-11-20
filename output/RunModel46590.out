@@ -1,0 +1,60 @@
+0
+Hands played: 197
+Most recent action rewards: [-485.0, -35.0, 104.0]
+Action frequencies: [182, 157, 166]
+Expected reward per action: [-2.6648351648351647, -0.2229299363057325, 0.6265060240963856]
+W,L by action: [[17, 66], [41, 22], [44, 6]]
+Total rewards: 196
+Raise-fold wins: 37
+Bet-fold wins:  28
+1/8 [==>...........................] - ETA: 3s - loss: 0.00888/8 [==============================] - 1s 1ms/step - loss: 0.0071
+with horrible cards: [[ 0.01593202 -0.00693649  0.00145893]]
+with four aces: [[ 0.00911915 -0.00591643  0.00451175]]
+1
+Hands played: 198
+Most recent action rewards: [-459.0, -211.0, 32.0]
+Action frequencies: [190, 145, 166]
+Expected reward per action: [-2.4157894736842107, -1.4551724137931035, 0.1927710843373494]
+W,L by action: [[13, 74], [33, 28], [40, 10]]
+Total rewards: 198
+Raise-fold wins: 32
+Bet-fold wins:  25
+1/8 [==>...........................] - ETA: 0s - loss: 0.00508/8 [==============================] - 0s 1ms/step - loss: 0.0110
+with horrible cards: [[-0.01184128  0.00361809  0.00640661]]
+with four aces: [[-0.01184128  0.00361809  0.00640661]]
+2
+Hands played: 205
+Most recent action rewards: [-450.0, -101.0, 66.0]
+Action frequencies: [163, 142, 197]
+Expected reward per action: [-2.7607361963190185, -0.7112676056338029, 0.3350253807106599]
+W,L by action: [[7, 69], [37, 20], [59, 13]]
+Total rewards: 205
+Raise-fold wins: 54
+Bet-fold wins:  28
+1/8 [==>...........................] - ETA: 0s - loss: 0.00668/8 [==============================] - 0s 1ms/step - loss: 0.0106
+with horrible cards: [[-0.01794138  0.00219121  0.00825063]]
+with four aces: [[-0.01794138  0.00219121  0.00825063]]
+3
+Hands played: 194
+Most recent action rewards: [-514.0, -105.0, 1.0]
+Action frequencies: [161, 147, 193]
+Expected reward per action: [-3.1925465838509317, -0.7142857142857143, 0.0051813471502590676]
+W,L by action: [[9, 59], [44, 23], [46, 13]]
+Total rewards: 194
+Raise-fold wins: 39
+Bet-fold wins:  34
+1/8 [==>...........................] - ETA: 0s - loss: 0.00608/8 [==============================] - 0s 1ms/step - loss: 0.0062
+with horrible cards: [[-0.02331041 -0.00033952  0.00986816]]
+with four aces: [[-0.02331041 -0.00033952  0.00986816]]
+4
+Hands played: 191
+Most recent action rewards: [-475.0, -73.0, 20.0]
+Action frequencies: [148, 142, 210]
+Expected reward per action: [-3.2094594594594597, -0.5140845070422535, 0.09523809523809523]
+W,L by action: [[9, 64], [40, 15], [49, 13]]
+Total rewards: 190
+Raise-fold wins: 44
+Bet-fold wins:  26
+1/8 [==>...........................] - ETA: 0s - loss: 0.00728/8 [==============================] - 0s 1ms/step - loss: 0.0083
+with horrible cards: [[-0.02824498 -0.00284556  0.01159841]]
+with four aces: [[-0.02824498 -0.00284556  0.01159841]]
