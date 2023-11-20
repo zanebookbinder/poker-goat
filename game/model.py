@@ -60,7 +60,7 @@ class Model():
 
         if model_files:
             # Load the highest-verion model
-            largest_model_file = model_files[29]
+            largest_model_file = model_files[-1]
             return load_model(os.path.join(model_dir, largest_model_file))
         else:
             print("No model files found in the directory")
