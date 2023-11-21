@@ -8,4 +8,5 @@
 #SBATCH -n 10                        # CPU reservation
 
 # Use this (with 1 CPU and 100 GB RAM)...
+export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
 python3 game/pokerGame.py 100
