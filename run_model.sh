@@ -8,4 +8,4 @@
 #SBATCH -n 10                        # CPU reservation
 
 # Use this (with 1 CPU and 100 GB RAM)...
-python3 game/pokerGame.py 5
+python3 game/pokerGame.py 100
