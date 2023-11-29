@@ -50,7 +50,7 @@ class PokerGame:
         print('Hands played:', self.handsPlayed)
         print('Most recent action rewards:', self.mostRecentActionRewards)
         print('Action frequencies:', self.actionFrequencies)
-        print('Expected reward per action:', [self.mostRecentActionRewards[i] / self.actionFrequencies[i] for i in range(3)])
+        print('Expected reward per action:', [self.mostRecentActionRewards[i] / max(self.actionFrequencies[i], 1) for i in range(3)])
         print('W,L by action:', self.wLByAction)
         print('Total rewards:', sum([sum(self.wLByAction[i]) for i in range(3)]))
         print('Raise-fold wins:', self.raiseFoldWins)
