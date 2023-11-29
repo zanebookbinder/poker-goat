@@ -22,6 +22,48 @@ class Deck():
 		self.cards.remove(card)
 		return card
 	
+	def selectBadCards(self, n):
+		if n == 2:
+			card1 = [c for c in self.cards if c.suit == 0 and c.rank == 2][0]
+			card2 = [c for c in self.cards if c.suit == 1 and c.rank == 4][0]
+			self.usedCards.append(card1)
+			self.usedCards.append(card2)
+			self.cards.remove(card1)
+			self.cards.remove(card2)
+			return [card1, card2]
+		elif n == 3:
+			card1 = [c for c in self.cards if c.suit == 0 and c.rank == 5][0]
+			card2 = [c for c in self.cards if c.suit == 1 and c.rank == 6][0]
+			card3 = [c for c in self.cards if c.suit == 2 and c.rank == 9][0]
+			self.usedCards.append(card1)
+			self.usedCards.append(card2)
+			self.usedCards.append(card3)
+			self.cards.remove(card1)
+			self.cards.remove(card2)
+			self.cards.remove(card3)
+			return [card1, card2, card3]
+		
+	def selectGreatCards(self, n):
+		if n == 2:
+			card1 = [c for c in self.cards if c.suit == 0 and c.rank == 14][0]
+			card2 = [c for c in self.cards if c.suit == 1 and c.rank == 14][0]
+			self.usedCards.append(card1)
+			self.usedCards.append(card2)
+			self.cards.remove(card1)
+			self.cards.remove(card2)
+			return [card1, card2]
+		elif n == 3:
+			card1 = [c for c in self.cards if c.suit == 2 and c.rank == 14][0]
+			card2 = [c for c in self.cards if c.suit == 3 and c.rank == 14][0]
+			card3 = [c for c in self.cards if c.suit == 2 and c.rank == 13][0]
+			self.usedCards.append(card1)
+			self.usedCards.append(card2)
+			self.usedCards.append(card3)
+			self.cards.remove(card1)
+			self.cards.remove(card2)
+			self.cards.remove(card3)
+			return [card1, card2, card3]
+	
 	def removeCardsFromDeck(self, cardsToRemove):
 		newCards = []
 		for card in self.cards:

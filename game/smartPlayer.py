@@ -8,10 +8,10 @@ class SmartPlayer(Player):
 	def chooseBestAction(self, model, newGameExperience, commonCards):
 		handScore = scoreHand(self.hand.cards, commonCards)
 
-		if handScore > 0.7:
+		if handScore > 0.5:
 			return 2
 		
-		if handScore > 0.4:
+		if handScore > 0.2:
 			return 1
 		
 		return 0

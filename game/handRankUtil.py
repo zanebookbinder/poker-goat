@@ -167,5 +167,15 @@ def compareAllHands(cardsList):
 
 	return {bestHandIndices[i]: bestHands[i] for i in range(len(bestHandIndices))}
 
+def calculateSimpleHandValue(cards):
+	if cards[0].rank == cards[1].rank:
+		return 1
+	
+	if max([c.rank for c in cards]) > 10 or len(set([c.suit for c in cards])) == 1 or abs(cards[0].rank - cards[1].rank) == 1:
+		return 0
+
+	return -1
+
+
 if __name__ == "__main__":
 	print(test())

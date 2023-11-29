@@ -40,7 +40,7 @@ class Model():
 
     def createModel(self):
         model = Sequential()
-        model.add(Dense(64, input_dim=30, activation= 'sigmoid'))
+        model.add(Dense(64, input_dim=18, activation= 'sigmoid'))
         model.add(Dense(128, activation = "relu"))
         model.add(Dense(64, activation = "relu"))
         model.add(Dense(32, activation = "relu"))
@@ -75,7 +75,7 @@ class Model():
         new_experiences = [e for e in experiences if e not in samples]
         expToFile(new_experiences)
 
-        x = np.empty((sample_size, 30))
+        x = np.empty((sample_size, 18))
         YTarget = np.empty((sample_size, 3))
         for i, sample in enumerate(samples):
             state, action, nextState, reward = sample
@@ -96,7 +96,7 @@ class Model():
 
         self.model.fit(x, YTarget) 
 
-        self.saveModel(file_name='models/model_' + str(self.model_iteration) + '.keras')
+        self.saveModel(file_name='removed_hole_card_neurons/model_' + str(self.model_iteration) + '.keras')
         self.model_iteration += 1     
         self.epsilon *= EPSILON_MULTIPLIER
 

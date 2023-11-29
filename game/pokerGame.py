@@ -7,6 +7,8 @@ from utils import expToFile
 from constants import BATCH_SIZE
 from smartPlayer import SmartPlayer
 import sys
+from card import Card
+import random
 
 class PokerGame:
     def __init__(self, num_batches, load_model, players, start_ante, bet_amount):
@@ -68,6 +70,13 @@ class PokerGame:
         for player in self.gameState.getActivePlayers():
             self.playerTurn(player, sharedCards, False)
 
+        
+
+        # if self.gameState.players[0].currentBet > self.gameState.players[1].currentBet and self.gameState.players[1].folded == False:
+        #     print("THIS SHOULD NOT BE HAPPENINGGGGGG")
+
+
+
         activePlayerBets = [p.currentBet for p in self.gameState.getActivePlayers()]
         
         # if someone bet later on, go back through and make the other players bet or fold
@@ -93,6 +102,10 @@ class PokerGame:
         )
 
         action = player.chooseBestAction(self.model, newGameExperience, commonCards)
+
+        # FAKE GAME WITH 10, 0, -10 REWARDS
+        # rewards = [10, 0, -10]
+        # newGameExperience.setGameReward(rewards[action])
         
         # ONLY DO THIS FOR NON-SMART PLAYER
         if not player.index:
@@ -104,7 +117,6 @@ class PokerGame:
             if player.hasTakenATurnThisHand:
                 mostRecentExperience = self.game_experiences[playerIndex][-1]
                 mostRecentExperience.setNextGameExperience(newGameExperience)
-
 
             self.game_experiences[playerIndex].append(newGameExperience)
             self.experiences_counter += 1

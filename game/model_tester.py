@@ -3,15 +3,15 @@ from constants import REWARD_NORM
 from model import Model
 
 horrible_cards = [
-	[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # 13 hole cards
+	[#1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # 13 hole cards
 		0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0,  # 13 common cards
-	2, 2, 3 / REWARD_NORM, 2 / REWARD_NORM] # suit mode, round, betting level, pot amount
+	2, 2, 3 / REWARD_NORM, 2 / REWARD_NORM, -1] # suit mode, round, betting level, pot amount, card score (normalized)
 ]
 
 four_aces = [
-	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2,  # 13 hole cards
+	[#0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2,  # 13 hole cards
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2,  # 13 common cards
-	2, 2, 4 / REWARD_NORM, 6 / REWARD_NORM] # suit mode, round, betting level, pot amount
+	2, 2, 4 / REWARD_NORM, 6 / REWARD_NORM, 0.75] # suit mode, round, betting level, pot amount, card score (normalized)
 ]
 
 def test_model(model):

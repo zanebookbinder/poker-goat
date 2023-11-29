@@ -1,6 +1,6 @@
 from collections import defaultdict
 from constants import REWARD_NORM
-	
+from handRankUtil import judgeHand, handTypeToValue, calculateSimpleHandValue
 class gameExperience():
 	def __init__(self, round, bettingLevel, pot, holeCards, commonCards):
 		self.round = round
@@ -34,6 +34,17 @@ class gameExperience():
 		self.holeCards = playerHandCards
 		self.commonCards = commonCards
 
+		# add hand rank score
+		allCards = holeCardObjects + commonCardObjects
+
+		if commonCardObjects:
+			self.cardsScore = handTypeToValue[judgeHand(allCards)[0]] #2 card hand vs 5 card hand
+		else:
+			self.cardsScore = calculateSimpleHandValue(holeCardObjects)
+
+		# normalize from 1-9 to -1 to 1
+		self.cardsScore = ((self.cardsScore - 1) / 4) - 1
+
 	def setNextGameExperience(self, nextGameExperience):
 		self.nextGameExperience = nextGameExperience
 
@@ -44,14 +55,15 @@ class gameExperience():
 		self.action = action
 
 	def getState(self):
+			# self.holeCards + \
 		return \
-			self.holeCards + \
 			self.commonCards + \
 			[
 				self.suitMode, 
 				self.round,
 				self.bettingLevel / REWARD_NORM,
 				self.pot / REWARD_NORM,
+				self.cardsScore
 			]
 
 	def getRLInfo(self):
