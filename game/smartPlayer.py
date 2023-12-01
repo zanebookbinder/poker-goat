@@ -17,7 +17,7 @@ class SmartPlayer(Player):
 		actions = [0, 1, 2]
 
 		if handScore > 0.6:
-			probs = [0.1, 0.2, 0.7]
+			probs = [0, 0.4, 0.6]
 		elif handScore > 0.3:
 			probs = [0.2, 0.6, 0.2]
 		else:

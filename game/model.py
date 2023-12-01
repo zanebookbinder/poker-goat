@@ -40,13 +40,16 @@ class Model():
 
     def createModel(self):
         model = Sequential()
-        model.add(Dense(64, input_dim=18, activation= 'sigmoid'))
-        model.add(Dense(128, activation = "relu"))
-        model.add(Dense(64, activation = "relu"))
-        model.add(Dense(32, activation = "relu"))
-        model.add(Dense(16, activation = "relu"))
+        model.add(Dense(16, input_dim=1, activation= 'sigmoid'))
         model.add(Dense(8, activation = "relu"))
         model.add(Dense(3, activation  = "linear"))
+        # model.add(Dense(64, input_dim=18, activation= 'sigmoid'))
+        # model.add(Dense(128, activation = "relu"))
+        # model.add(Dense(64, activation = "relu"))
+        # model.add(Dense(32, activation = "relu"))
+        # model.add(Dense(16, activation = "relu"))
+        # model.add(Dense(8, activation = "relu"))
+        # model.add(Dense(3, activation  = "linear"))
         model.compile(loss="mse", optimizer="Adam")
         self.model = model
 
@@ -75,7 +78,7 @@ class Model():
         new_experiences = [e for e in experiences if e not in samples]
         expToFile(new_experiences)
 
-        x = np.empty((sample_size, 18))
+        x = np.empty((sample_size, 1))
         YTarget = np.empty((sample_size, 3))
         for i, sample in enumerate(samples):
             state, action, nextState, reward = sample
@@ -96,7 +99,7 @@ class Model():
 
         self.model.fit(x, YTarget) 
 
-        self.saveModel(file_name='november_30_test/model_' + str(self.model_iteration) + '.keras')
+        self.saveModel(file_name='one_input_test/model_' + str(self.model_iteration) + '.keras')
         self.model_iteration += 1     
         self.epsilon *= EPSILON_MULTIPLIER
 

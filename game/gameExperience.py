@@ -1,6 +1,7 @@
 from collections import defaultdict
 from constants import REWARD_NORM
 from handRankUtil import judgeHand, handTypeToValue, calculateSimpleHandValue
+from handScoreUtil import scoreHand
 class gameExperience():
 	def __init__(self, round, bettingLevel, pot, holeCards, commonCards):
 		self.round = round
@@ -11,6 +12,9 @@ class gameExperience():
 		self.suitMode = None
 		self.nextGameExperience = None
 		self.reward = 0
+
+		self.holeCardList = holeCards
+		self.commonCardList = commonCards
 
 		self.convertCardsIntoModelInput(holeCards, commonCards)
 	
@@ -49,6 +53,10 @@ class gameExperience():
 		self.nextGameExperience = nextGameExperience
 
 	def setGameReward(self, reward):
+		# risk-averse player
+		if reward < 0:
+			reward *= 1.5
+			
 		self.reward = reward / REWARD_NORM
 
 	def setActionTaken(self, action):
@@ -56,15 +64,26 @@ class gameExperience():
 
 	def getState(self):
 			# self.holeCards + \
-		return \
-			self.commonCards + \
-			[
-				self.suitMode, 
-				self.round,
-				self.bettingLevel / REWARD_NORM,
-				self.pot / REWARD_NORM,
-				self.cardsScore
-			]
+
+
+		return [self.cardsScore]
+	
+		if self.commonCardList:
+			handScore = scoreHand(self.holeCardList, self.commonCardList) * 2 - 1
+		else:
+			handScore = calculateSimpleHandValue(self.holeCardList)
+
+		return [handScore] # -1 to 1
+
+		# return \
+		# 	self.commonCards + \
+		# 	[
+		# 		self.suitMode, 
+		# 		self.round,
+		# 		self.bettingLevel / REWARD_NORM,
+		# 		self.pot / REWARD_NORM,
+		# 		self.cardsScore
+		# 	]
 
 	def getRLInfo(self):
 		nextState = self.nextGameExperience.getState() if self.nextGameExperience else []
