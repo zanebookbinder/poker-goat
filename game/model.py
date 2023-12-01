@@ -96,7 +96,7 @@ class Model():
 
         self.model.fit(x, YTarget) 
 
-        self.saveModel(file_name='removed_hole_card_neurons/model_' + str(self.model_iteration) + '.keras')
+        self.saveModel(file_name='november_30_test/model_' + str(self.model_iteration) + '.keras')
         self.model_iteration += 1     
         self.epsilon *= EPSILON_MULTIPLIER
 
