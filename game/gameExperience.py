@@ -17,6 +17,20 @@ class gameExperience():
 		self.commonCardList = commonCards
 
 		self.convertCardsIntoModelInput(holeCards, commonCards)
+
+	def getAutoencoderInput(self):
+		holeCardRepresentation = [0] * 52
+
+		for holeCard in self.holeCardList:
+			holeCardRepresentation[holeCard.suit * 13 + (holeCard.rank - 2)] = 1
+
+		commonCardRepresentation = [0] * 52
+
+		for commonCard in self.commonCardList:
+			commonCardRepresentation[commonCard.suit * 13 + (commonCard.rank - 2)] = 1
+
+		# 104 array of zeroes and ones
+		return holeCardRepresentation + commonCardRepresentation
 	
 	def convertCardsIntoModelInput(self, holeCardObjects, commonCardObjects):
 		
@@ -54,8 +68,8 @@ class gameExperience():
 
 	def setGameReward(self, reward):
 		# risk-averse player
-		if reward < 0:
-			reward *= 1.5
+		# if reward < 0:
+		# 	reward *= 1.5
 			
 		self.reward = reward / REWARD_NORM
 
