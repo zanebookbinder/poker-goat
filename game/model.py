@@ -99,7 +99,7 @@ class Model():
 
         self.model.fit(x, YTarget) 
 
-        self.saveModel(file_name='one_input_test/model_' + str(self.model_iteration) + '.keras')
+        self.saveModel(file_name='one_input_test_no_risk_aversion/model_' + str(self.model_iteration) + '.keras')
         self.model_iteration += 1     
         self.epsilon *= EPSILON_MULTIPLIER
 
