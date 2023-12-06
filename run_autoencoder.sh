@@ -9,4 +9,5 @@
 
 # Use this (with 1 CPU and 100 GB RAM)...
 export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
-python3 game/cardAutoencoder.py
+cd game
+python3 cardAutoencoder.py
