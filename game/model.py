@@ -97,10 +97,10 @@ class Model():
             
             YTarget[i] = y_actual
 
-        self.model.fit(x, YTarget) 
+        self.model.fit(x, YTarget, verbose=0) 
 
         if not self.model_iteration % 10:
-            self.saveModel(file_name='one_input_test_no_risk_aversion/model_' + str(self.model_iteration) + '.keras')
+            self.saveModel(file_name='december_6th/model_' + str(self.model_iteration) + '.keras')
         self.model_iteration += 1     
         self.epsilon *= EPSILON_MULTIPLIER
 

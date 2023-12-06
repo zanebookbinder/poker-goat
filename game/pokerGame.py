@@ -26,6 +26,7 @@ class PokerGame:
         self.betFoldWins = 0
 
         for i in range(num_batches):
+            print('\n')
             print(i)
             self.playSimplePoker()
             gameExperiences = [gE.getRLInfo() for sublist in self.game_experiences.values() for gE in sublist]

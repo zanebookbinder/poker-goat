@@ -14,30 +14,39 @@ from model import Model
 # 	2, 2, 3 / REWARD_NORM, 2 / REWARD_NORM, 0.75] # suit mode, round, betting level, pot amount, card score (normalized)
 # ]
 
-horrible_cards = [[-1]]
-four_aces = [[1]]
+horrible_cards = [[-0.9]]
+four_aces = [[0.9]]
 
 def test_model(model):
-	qVals = model.predict(horrible_cards)
-	print('with horrible cards:', qVals)
-	qVals = model.predict(four_aces)
-	print('with four aces:', qVals)
+	qVals = model.predict(horrible_cards,verbose=0)[0]
+	print('With horrible cards:', qVals)
+	qVals = model.predict(four_aces, verbose=0)[0]
+	print('With four aces:', qVals)
 
-import os
-from keras.models import load_model
+# import os
+# from keras.models import load_model
 
-model_dir = '/Users/zanebookbinder/Desktop/poker-goat/one_input_test'
-model_files = [f for f in os.listdir(model_dir) if f.endswith('.keras')]
-model_files.sort(key = lambda x: int(x.replace('model_', '').replace('.keras', '')))
+# model_dir = '/Users/zanebookbinder/Desktop/poker-goat/game/one_input_test_no_risk_aversion'
+# model_files = [f for f in os.listdir(model_dir) if f.endswith('.keras')]
+# model_files.sort(key = lambda x: int(x.replace('model_', '').replace('.keras', '')))
 
 
-# Load the highest-verion model
-largest_model_file = model_files[-1]
-print(largest_model_file)
-model = load_model(os.path.join(model_dir, largest_model_file))
+# # Load the highest-verion model
+# largest_model_file = model_files[-1]
+# print(largest_model_file)
+# model = load_model(os.path.join(model_dir, largest_model_file))
 
-test_model(model)
-            
+# test_model(model)
+
+
+
+
+
+
+
+
+	   
+	        
 # test a specific input
 
 # model = Model(load_model=True)

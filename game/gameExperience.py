@@ -56,12 +56,13 @@ class gameExperience():
 		allCards = holeCardObjects + commonCardObjects
 
 		if commonCardObjects:
-			self.cardsScore = handTypeToValue[judgeHand(allCards)[0]] #2 card hand vs 5 card hand
-		else:
-			self.cardsScore = calculateSimpleHandValue(holeCardObjects)
+			self.cardsScore = handTypeToValue[judgeHand(allCards)[0]]
 
-		# normalize from 1-9 to -1 to 1
-		self.cardsScore = ((self.cardsScore - 1) / 4) - 1
+			# normalize from 1-9 to -1 to 1
+			self.cardsScore = ((self.cardsScore - 1) / 4) - 1
+		else:
+			# don't need to normalize, already in [-1, 1]
+			self.cardsScore = calculateSimpleHandValue(holeCardObjects)
 
 	def setNextGameExperience(self, nextGameExperience):
 		self.nextGameExperience = nextGameExperience
