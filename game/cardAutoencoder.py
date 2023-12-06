@@ -1,17 +1,12 @@
 import numpy as np
 import random
-from keras.models import Sequential, Model, load_model
+from keras.models import  Model, load_model
 from keras.layers import Dense, Input
 import os
-from utils import readExperiencesFile, expToFile, deleteFileContent
-from constants import BATCH_SIZE, STARTING_EPSILON, EPSILON_MULTIPLIER
-from deck import Deck
 
 
 class AutoEncoder():
-    def __init__(self, load_model = True, common = False):
-        self.common = common
-            
+    def __init__(self, load_model = True):
         if load_model:
             self.model, iteration = self.loadModelFromFile()
             self.model_iteration = iteration
@@ -19,58 +14,64 @@ class AutoEncoder():
             self.model_iteration = 0
             self.createModel()
 
-        for i in range(100):
-            print(i)
-            data = self.generateShitTonOfHands()
+        for i in range(1000):
+            if not i % 10:
+                print('Epoch:', i)
+            data = self.generateAllHands()
             self.trainModel(data)
 
-    def generateShitTonOfHands(self):
+    def generateAllHands(self):
         outputHands = []
 
-        for _ in range(10000):
-            deck = Deck()
-            holeCards = []
-            commonCards = []
+        for card1 in range(52):
+            for card2 in range(card1 + 1, 52):
+                newArr = [1 if i in [card1, card2] else 0 for i in range(52)]
+                outputHands.append(newArr)
 
-            for _ in range(2):
-                nextCard = deck.selectRandomCard()
-                holeCards.append(nextCard)
-
-            if not self.common:    
-                outputHands.append(self.getAutoencoderInput(holeCards, commonCards))
-                continue
-
-            for _ in range(3):
-                commonCards.append(deck.selectRandomCard())
-
-            outputHands.append(self.getAutoencoderInput(holeCards, commonCards))
+                for card3 in range(card2 + 1, 52):
+                    newNewArr = newArr[:]
+                    newNewArr[card3] = 1
+                    outputHands.append(newNewArr)
 
         return outputHands
 
-    def getAutoencoderInput(self, holeCardList, commonCardList):
-        holeCardRepresentation = [0] * 52
+        # for _ in range(10000):
+        #     deck = Deck()
+        #     holeCards = []
+        #     commonCards = []
 
-        for holeCard in holeCardList:
-            holeCardRepresentation[holeCard.suit * 13 + (holeCard.rank - 2)] = 1
+        #     for _ in range(2):
+        #         nextCard = deck.selectRandomCard()
+        #         holeCards.append(nextCard)
 
-        commonCardRepresentation = [0] * 52
+        #     if not self.common:    
+        #         outputHands.append(self.getAutoencoderInput(holeCards, commonCards))
+        #         continue
 
-        for commonCard in commonCardList:
-            commonCardRepresentation[commonCard.suit * 13 + (commonCard.rank - 2)] = 1
+        #     for _ in range(3):
+        #         commonCards.append(deck.selectRandomCard())
 
-        # 104 array of zeroes and ones
-        return holeCardRepresentation + commonCardRepresentation
+        #     outputHands.append(self.getAutoencoderInput(holeCards, commonCards))
+
+    def getAutoencoderInput(self, cardList):
+        output = [0] * 52
+
+        for card in cardList:
+            output[(card.rank - 2) * 4 + card.suit] = 1
+
+        # 52-length array of zeroes and ones
+        return output
 
     def createModel(self):
-        input_data = Input(shape=(104,))
+        input_data = Input(shape=(52,))
 
-        encoded = Dense(64, activation='relu')(input_data)
-        encoded = Dense(32, activation='relu')(encoded)
-        encoded = Dense(10, activation='relu')(encoded)  # Encoding into 10 dimensions
+        encoded = Dense(16, activation='relu')(input_data)
+        # encoded = Dense(32, activation='relu')(encoded)
+        encoded = Dense(8, activation='relu')(encoded)  # Encoding into 10 dimensions
 
-        decoded = Dense(32, activation='relu')(encoded)
-        decoded = Dense(64, activation='relu')(decoded)
-        decoded = Dense(104, activation='sigmoid')(decoded)  # Output layer with sigmoid activation
+        decoded = Dense(16, activation='relu')(encoded)
+        # decoded = Dense(64, activation='relu')(decoded)
+        decoded = Dense(52, activation='sigmoid')(decoded)  # Output layer with sigmoid activation
 
         autoencoder = Model(input_data, decoded)
         autoencoder.compile(optimizer='adam', loss='binary_crossentropy')  # Adjust loss based on your problem
@@ -80,28 +81,29 @@ class AutoEncoder():
         self.model.fit(experiences, experiences)
 
         input = [
-            1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-        ]
-        if self.common:
-            input = [
-            1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1
+            1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
         ]
             
         result = self.model.predict([input])[0]
-        
-        loss = sum([abs(input[i] - result[i]) for i in range(104)])
+        loss = sum([abs(input[i] - result[i]) for i in range(52)])
+        print('One test loss:', loss)
 
-        if not self.model_iteration % 5:
-            print(result)
+        inputs = []
+        for _ in range(10):
+            random_numbers = [random.randint(0, 51) for _ in range(3)]
+            input = [0] * 52
+            for num in random_numbers:
+                input[num] = 1
+            inputs.append(input)
             
-        print(loss)
-        if self.common:
-            status = "common"
-        else:
-            status = "hole"
-        self.saveModel(file_name='autoencoder/' + status + '_model_' + str(self.model_iteration) + '.keras')
+        result = self.model.predict(inputs, verbose=0)
+        total_loss = 0
+        for j in range(len(result)):
+            total_loss += sum([abs(inputs[j][i] - result[j][i]) for i in range(52)]) 
+        
+        print('Total loss', total_loss)
+        
+        self.saveModel(file_name='autoencoder/model_' + str(self.model_iteration) + '.keras')
         self.model_iteration += 1  
 
     def saveModel(self, file_name = "model.keras"):
@@ -124,5 +126,4 @@ class AutoEncoder():
         encoded_data = encoder.predict(data)
         return encoded_data #Return an array of size 10 with representative information of 104 cards
 
-AutoEncoder(load_model = False, common = False)
-AutoEncoder(load_model = False, common = True)
+AutoEncoder(load_model = False)

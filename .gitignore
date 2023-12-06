@@ -1,4 +1,5 @@
 *.pyc
+*.keras
 models
 game/*.json
 experiences.json

@@ -22,6 +22,21 @@ def test_model(model):
 	print('with horrible cards:', qVals)
 	qVals = model.predict(four_aces)
 	print('with four aces:', qVals)
+
+import os
+from keras.models import load_model
+
+model_dir = '/Users/zanebookbinder/Desktop/poker-goat/one_input_test'
+model_files = [f for f in os.listdir(model_dir) if f.endswith('.keras')]
+model_files.sort(key = lambda x: int(x.replace('model_', '').replace('.keras', '')))
+
+
+# Load the highest-verion model
+largest_model_file = model_files[-1]
+print(largest_model_file)
+model = load_model(os.path.join(model_dir, largest_model_file))
+
+test_model(model)
             
 # test a specific input
 
