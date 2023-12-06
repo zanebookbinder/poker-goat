@@ -14,11 +14,16 @@ class AutoEncoder():
             self.model_iteration = 0
             self.createModel()
 
+        print('Generating all hands...')
+        data = self.generateAllHands()
+        print('Done generating all hands, traning now...')
         for i in range(1000):
             if not i % 10:
                 print('Epoch:', i)
-            data = self.generateAllHands()
+            
             self.trainModel(data)
+
+        print('Finished training!')
 
     def generateAllHands(self):
         outputHands = []
@@ -78,15 +83,16 @@ class AutoEncoder():
         self.model = autoencoder
 
     def trainModel(self, experiences):
-        self.model.fit(experiences, experiences)
-
-        input = [
-            1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-        ]
-            
-        result = self.model.predict([input])[0]
-        loss = sum([abs(input[i] - result[i]) for i in range(52)])
-        print('One test loss:', loss)
+        self.model.fit(experiences, experiences, verbose=0)
+        
+        if not self.model_iteration % 50:
+            input = [
+                1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+            ]
+            result = self.model.predict([input], verbose=0)[0]
+            loss = sum([abs(input[i] - result[i]) for i in range(52)])
+            print('One test loss:', loss)
+            print(result)
 
         inputs = []
         for _ in range(10):
@@ -103,7 +109,8 @@ class AutoEncoder():
         
         print('Total loss', total_loss)
         
-        self.saveModel(file_name='autoencoder/model_' + str(self.model_iteration) + '.keras')
+        if not self.model_iteration % 50:
+            self.saveModel(file_name='autoencoder/model_' + str(self.model_iteration) + '.keras')
         self.model_iteration += 1  
 
     def saveModel(self, file_name = "model.keras"):
