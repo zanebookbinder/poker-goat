@@ -3,3 +3,4 @@ models
 game/*.json
 experiences.json
 run_model.sh
+game/experiences.json
