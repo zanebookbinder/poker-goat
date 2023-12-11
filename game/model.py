@@ -120,8 +120,8 @@ class Model():
 
         if not self.model_iteration % 10:
             self.saveModel(file_name='december_10th/model_' + str(self.model_iteration) + '.keras')
-            from model_tester import test_model
-            test_model(self.model)  
+            # from model_tester import test_model
+            # test_model(self.model)  
         self.model_iteration += 1     
         self.epsilon *= EPSILON_MULTIPLIER
 
