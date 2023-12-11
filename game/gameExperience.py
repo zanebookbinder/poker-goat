@@ -1,9 +1,10 @@
 from collections import defaultdict
+import numpy as np
 from constants import REWARD_NORM
 from handRankUtil import judgeHand, handTypeToValue, calculateSimpleHandValue
 from handScoreUtil import scoreHand
 class gameExperience():
-	def __init__(self, round, bettingLevel, pot, holeCards, commonCards):
+	def __init__(self, round, bettingLevel, pot, holeCards, commonCards, autoencoder):
 		self.round = round
 		self.bettingLevel = bettingLevel
 		self.pot = pot
@@ -12,57 +13,59 @@ class gameExperience():
 		self.suitMode = None
 		self.nextGameExperience = None
 		self.reward = 0
+		self.autoencoder = autoencoder
 
 		self.holeCardList = holeCards
 		self.commonCardList = commonCards
 
 		self.convertCardsIntoModelInput(holeCards, commonCards)
+	
+	def getAutoencoderInput(self, cardList):
+		output = [0] * 52
 
-	def getAutoencoderInput(self):
-		holeCardRepresentation = [0] * 52
+		for card in cardList:
+			output[(card.rank - 2) * 4 + card.suit] = 1
 
-		for holeCard in self.holeCardList:
-			holeCardRepresentation[holeCard.suit * 13 + (holeCard.rank - 2)] = 1
-
-		commonCardRepresentation = [0] * 52
-
-		for commonCard in self.commonCardList:
-			commonCardRepresentation[commonCard.suit * 13 + (commonCard.rank - 2)] = 1
-
-		# 104 array of zeroes and ones
-		return holeCardRepresentation + commonCardRepresentation
+		# 52-length array of zeroes and ones
+		return output
 	
 	def convertCardsIntoModelInput(self, holeCardObjects, commonCardObjects):
-		
-		playerHandCards = [0] * 13
-		suitCounts = defaultdict(int)
+		modelInput1 = self.autoencoder.predict([self.getAutoencoderInput(holeCardObjects)], verbose=0)[0]
+		modelInput2 = self.autoencoder.predict([self.getAutoencoderInput(commonCardObjects)], verbose=0)[0]
 
-		for card in holeCardObjects: #just use self.holeCards? doing this changed stuff in output so maybe not
-			cardRank = card.rank
-			playerHandCards[cardRank-2] += 1
-			suitCounts[card.suit] += 1
+		self.modelInput = modelInput1.tolist() +  modelInput2.tolist()
 
-		commonCards = [0] * 13
-		for card in commonCardObjects:
-			cardRank = card.rank
-			commonCards[cardRank-2] += 1
-			suitCounts[card.suit] += 1
+		# print(modelInput1 + modelInput2)
+		# print(len(self.modelInput), self.modelInput)
+		# playerHandCards = [0] * 13
+		# suitCounts = defaultdict(int)
 
-		self.suitMode = max(suitCounts.values())
-		self.holeCards = playerHandCards
-		self.commonCards = commonCards
+		# for card in holeCardObjects: #just use self.holeCards? doing this changed stuff in output so maybe not
+		# 	cardRank = card.rank
+		# 	playerHandCards[cardRank-2] += 1
+		# 	suitCounts[card.suit] += 1
 
-		# add hand rank score
-		allCards = holeCardObjects + commonCardObjects
+		# commonCards = [0] * 13
+		# for card in commonCardObjects:
+		# 	cardRank = card.rank
+		# 	commonCards[cardRank-2] += 1
+		# 	suitCounts[card.suit] += 1
 
-		if commonCardObjects:
-			self.cardsScore = handTypeToValue[judgeHand(allCards)[0]]
+		# self.suitMode = max(suitCounts.values())
+		# self.holeCards = playerHandCards
+		# self.commonCards = commonCards
 
-			# normalize from 1-9 to -1 to 1
-			self.cardsScore = ((self.cardsScore - 1) / 4) - 1
-		else:
-			# don't need to normalize, already in [-1, 1]
-			self.cardsScore = calculateSimpleHandValue(holeCardObjects)
+		# # add hand rank score
+		# allCards = holeCardObjects + commonCardObjects
+
+		# if commonCardObjects:
+		# 	self.cardsScore = handTypeToValue[judgeHand(allCards)[0]]
+
+		# 	# normalize from 1-9 to -1 to 1
+		# 	self.cardsScore = ((self.cardsScore - 1) / 4) - 1
+		# else:
+		# 	# don't need to normalize, already in [-1, 1]
+		# 	self.cardsScore = calculateSimpleHandValue(holeCardObjects)
 
 	def setNextGameExperience(self, nextGameExperience):
 		self.nextGameExperience = nextGameExperience
@@ -79,9 +82,7 @@ class gameExperience():
 
 	def getState(self):
 			# self.holeCards + \
-
-
-		return [self.cardsScore]
+		return [self.modelInput]
 	
 		if self.commonCardList:
 			handScore = scoreHand(self.holeCardList, self.commonCardList) * 2 - 1

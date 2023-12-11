@@ -1,6 +1,7 @@
 from utils import readExperiencesFile
 from constants import REWARD_NORM
 from model import Model
+from card import Card
 
 # horrible_cards = [
 # 	[#1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # 13 hole cards
@@ -14,8 +15,24 @@ from model import Model
 # 	2, 2, 3 / REWARD_NORM, 2 / REWARD_NORM, 0.75] # suit mode, round, betting level, pot amount, card score (normalized)
 # ]
 
-horrible_cards = [[-0.9]]
-four_aces = [[0.9]]
+# horrible_cards = [[-0.9]]
+# four_aces = [[0.9]]
+
+
+
+horrible_cards = [
+	1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+]
+
+four_aces = [
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, #HoleCards
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0	#CommonCards
+]
 
 def test_model(model):
 	qVals = model.predict(horrible_cards,verbose=0)[0]
@@ -26,7 +43,7 @@ def test_model(model):
 # import os
 # from keras.models import load_model
 
-# model_dir = '/Users/zanebookbinder/Desktop/poker-goat/game/one_input_test_no_risk_aversion'
+# model_dir = '/Users/zanebookbinder/Desktop/poker-goat/game/december_6th'
 # model_files = [f for f in os.listdir(model_dir) if f.endswith('.keras')]
 # model_files.sort(key = lambda x: int(x.replace('model_', '').replace('.keras', '')))
 

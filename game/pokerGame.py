@@ -100,6 +100,7 @@ class PokerGame:
             self.gameState.pot,
             player.hand.cards,
             commonCards,
+            self.model.autoencoder
         )
 
         action = player.chooseBestAction(self.model, newGameExperience, commonCards)

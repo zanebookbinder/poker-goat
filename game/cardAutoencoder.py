@@ -128,9 +128,5 @@ class AutoEncoder():
         else:
             print("No model files found in the directory")
 
-    def extractDenseFeatures(self, data):
-        encoder = Model(inputs=self.model.input, outputs=self.model.get_layer('dense_3').output)
-        encoded_data = encoder.predict(data)
-        return encoded_data #Return an array of size 10 with representative information of 104 cards
 
 AutoEncoder(load_model = False)
