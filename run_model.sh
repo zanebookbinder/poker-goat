@@ -10,4 +10,4 @@
 # Use this (with 1 CPU and 100 GB RAM)...
 export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
 cd game
-python3 pokerGame.py 1000
+python3 pokerGame.py 100

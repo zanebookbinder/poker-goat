@@ -1,0 +1,1100 @@
+
+
+0
+Hands played: 231
+Most recent action rewards: [-173.0, -8.0, -14.0]
+Action frequencies: [167, 180, 154]
+Expected reward per action: [-1.035928143712575, -0.044444444444444446, -0.09090909090909091]
+W,L by action: [[10, 51], [58, 26], [65, 21]]
+Total rewards: 231
+Raise-fold wins: 56
+Bet-fold wins:  44
+
+
+1
+Hands played: 227
+Most recent action rewards: [-273.0, -41.0, 131.0]
+Action frequencies: [165, 168, 167]
+Expected reward per action: [-1.6545454545454545, -0.24404761904761904, 0.7844311377245509]
+W,L by action: [[4, 63], [53, 24], [67, 16]]
+Total rewards: 227
+Raise-fold wins: 49
+Bet-fold wins:  38
+
+
+2
+Hands played: 214
+Most recent action rewards: [-149.0, -114.0, 135.0]
+Action frequencies: [167, 166, 169]
+Expected reward per action: [-0.8922155688622755, -0.6867469879518072, 0.7988165680473372]
+W,L by action: [[9, 46], [46, 38], [63, 12]]
+Total rewards: 214
+Raise-fold wins: 48
+Bet-fold wins:  28
+
+
+3
+Hands played: 230
+Most recent action rewards: [-209.0, -39.0, 11.0]
+Action frequencies: [161, 183, 159]
+Expected reward per action: [-1.2981366459627328, -0.21311475409836064, 0.06918238993710692]
+W,L by action: [[9, 52], [56, 29], [64, 19]]
+Total rewards: 229
+Raise-fold wins: 56
+Bet-fold wins:  41
+
+
+4
+Hands played: 222
+Most recent action rewards: [-191.0, -25.0, 70.0]
+Action frequencies: [168, 181, 152]
+Expected reward per action: [-1.1369047619047619, -0.13812154696132597, 0.4605263157894737]
+W,L by action: [[6, 51], [64, 27], [63, 11]]
+Total rewards: 222
+Raise-fold wins: 54
+Bet-fold wins:  41
+
+
+5
+Hands played: 229
+Most recent action rewards: [-235.0, 14.0, 58.0]
+Action frequencies: [149, 176, 175]
+Expected reward per action: [-1.5771812080536913, 0.07954545454545454, 0.3314285714285714]
+W,L by action: [[7, 50], [64, 24], [66, 18]]
+Total rewards: 229
+Raise-fold wins: 57
+Bet-fold wins:  49
+
+
+6
+Hands played: 222
+Most recent action rewards: [-243.0, 7.0, 92.0]
+Action frequencies: [155, 154, 192]
+Expected reward per action: [-1.5677419354838709, 0.045454545454545456, 0.4791666666666667]
+W,L by action: [[10, 47], [62, 23], [63, 17]]
+Total rewards: 222
+Raise-fold wins: 50
+Bet-fold wins:  47
+
+
+7
+Hands played: 216
+Most recent action rewards: [-200.0, -105.0, 51.0]
+Action frequencies: [144, 192, 165]
+Expected reward per action: [-1.3888888888888888, -0.546875, 0.3090909090909091]
+W,L by action: [[8, 46], [58, 35], [51, 18]]
+Total rewards: 216
+Raise-fold wins: 40
+Bet-fold wins:  44
+
+
+8
+Hands played: 222
+Most recent action rewards: [-210.0, -173.0, 75.0]
+Action frequencies: [143, 180, 177]
+Expected reward per action: [-1.4685314685314685, -0.9611111111111111, 0.423728813559322]
+W,L by action: [[8, 46], [53, 32], [64, 17]]
+Total rewards: 220
+Raise-fold wins: 49
+Bet-fold wins:  43
+
+
+9
+Hands played: 234
+Most recent action rewards: [-321.0, -47.0, 109.0]
+Action frequencies: [143, 189, 168]
+Expected reward per action: [-2.2447552447552446, -0.24867724867724866, 0.6488095238095238]
+W,L by action: [[9, 56], [62, 29], [66, 11]]
+Total rewards: 233
+Raise-fold wins: 59
+Bet-fold wins:  44
+
+
+10
+Hands played: 224
+Most recent action rewards: [-230.0, -100.0, 26.0]
+Action frequencies: [166, 152, 183]
+Expected reward per action: [-1.3855421686746987, -0.6578947368421053, 0.14207650273224043]
+W,L by action: [[8, 56], [53, 29], [56, 20]]
+Total rewards: 222
+Raise-fold wins: 40
+Bet-fold wins:  41
+
+
+11
+Hands played: 233
+Most recent action rewards: [-228.0, -66.0, 132.0]
+Action frequencies: [152, 176, 174]
+Expected reward per action: [-1.5, -0.375, 0.7586206896551724]
+W,L by action: [[5, 55], [68, 24], [67, 13]]
+Total rewards: 232
+Raise-fold wins: 48
+Bet-fold wins:  55
+
+
+12
+Hands played: 229
+Most recent action rewards: [-168.0, 4.0, 73.0]
+Action frequencies: [117, 191, 192]
+Expected reward per action: [-1.435897435897436, 0.020942408376963352, 0.3802083333333333]
+W,L by action: [[6, 34], [77, 27], [65, 20]]
+Total rewards: 229
+Raise-fold wins: 55
+Bet-fold wins:  53
+
+
+13
+Hands played: 226
+Most recent action rewards: [-258.0, 9.0, 147.0]
+Action frequencies: [168, 158, 174]
+Expected reward per action: [-1.5357142857142858, 0.056962025316455694, 0.8448275862068966]
+W,L by action: [[12, 52], [55, 20], [75, 12]]
+Total rewards: 226
+Raise-fold wins: 56
+Bet-fold wins:  38
+
+
+14
+Hands played: 215
+Most recent action rewards: [-150.0, 103.0, -82.0]
+Action frequencies: [149, 174, 177]
+Expected reward per action: [-1.0067114093959733, 0.5919540229885057, -0.4632768361581921]
+W,L by action: [[7, 41], [52, 23], [63, 27]]
+Total rewards: 213
+Raise-fold wins: 52
+Bet-fold wins:  26
+
+
+15
+Hands played: 240
+Most recent action rewards: [-170.0, 46.0, 66.0]
+Action frequencies: [124, 190, 186]
+Expected reward per action: [-1.3709677419354838, 0.24210526315789474, 0.3548387096774194]
+W,L by action: [[8, 32], [79, 23], [77, 21]]
+Total rewards: 240
+Raise-fold wins: 65
+Bet-fold wins:  58
+
+
+16
+Hands played: 217
+Most recent action rewards: [-236.0, 14.0, -63.0]
+Action frequencies: [135, 173, 192]
+Expected reward per action: [-1.7481481481481482, 0.08092485549132948, -0.328125]
+W,L by action: [[6, 40], [69, 23], [61, 18]]
+Total rewards: 217
+Raise-fold wins: 49
+Bet-fold wins:  48
+
+
+17
+Hands played: 223
+Most recent action rewards: [-208.0, -67.0, 31.0]
+Action frequencies: [145, 187, 172]
+Expected reward per action: [-1.4344827586206896, -0.3582887700534759, 0.18023255813953487]
+W,L by action: [[8, 42], [60, 31], [63, 18]]
+Total rewards: 222
+Raise-fold wins: 50
+Bet-fold wins:  40
+
+
+18
+Hands played: 218
+Most recent action rewards: [-229.0, 4.0, 6.0]
+Action frequencies: [137, 188, 176]
+Expected reward per action: [-1.6715328467153285, 0.02127659574468085, 0.03409090909090909]
+W,L by action: [[8, 41], [74, 30], [49, 15]]
+Total rewards: 217
+Raise-fold wins: 40
+Bet-fold wins:  50
+
+
+19
+Hands played: 218
+Most recent action rewards: [-255.0, -33.0, 38.0]
+Action frequencies: [154, 153, 194]
+Expected reward per action: [-1.655844155844156, -0.21568627450980393, 0.1958762886597938]
+W,L by action: [[6, 49], [40, 29], [72, 22]]
+Total rewards: 218
+Raise-fold wins: 60
+Bet-fold wins:  23
+
+
+20
+Hands played: 238
+Most recent action rewards: [-142.0, 78.0, 274.0]
+Action frequencies: [142, 165, 193]
+Expected reward per action: [-1.0, 0.4727272727272727, 1.4196891191709844]
+W,L by action: [[6, 40], [67, 21], [92, 10]]
+Total rewards: 236
+Raise-fold wins: 74
+Bet-fold wins:  47
+
+
+21
+Hands played: 217
+Most recent action rewards: [-312.0, -23.0, 144.0]
+Action frequencies: [136, 181, 183]
+Expected reward per action: [-2.2941176470588234, -0.1270718232044199, 0.7868852459016393]
+W,L by action: [[6, 50], [62, 23], [63, 11]]
+Total rewards: 215
+Raise-fold wins: 50
+Bet-fold wins:  46
+
+
+22
+Hands played: 220
+Most recent action rewards: [-230.0, -65.0, 77.0]
+Action frequencies: [158, 176, 166]
+Expected reward per action: [-1.4556962025316456, -0.3693181818181818, 0.463855421686747]
+W,L by action: [[12, 50], [57, 30], [58, 13]]
+Total rewards: 220
+Raise-fold wins: 49
+Bet-fold wins:  40
+
+
+23
+Hands played: 217
+Most recent action rewards: [-260.0, -46.0, 0.0]
+Action frequencies: [165, 170, 168]
+Expected reward per action: [-1.5757575757575757, -0.27058823529411763, 0.0]
+W,L by action: [[4, 58], [54, 24], [58, 18]]
+Total rewards: 216
+Raise-fold wins: 47
+Bet-fold wins:  38
+
+
+24
+Hands played: 221
+Most recent action rewards: [-174.0, -24.0, 24.0]
+Action frequencies: [169, 175, 157]
+Expected reward per action: [-1.029585798816568, -0.13714285714285715, 0.15286624203821655]
+W,L by action: [[14, 48], [63, 25], [55, 15]]
+Total rewards: 220
+Raise-fold wins: 46
+Bet-fold wins:  46
+
+
+25
+Hands played: 221
+Most recent action rewards: [-208.0, -31.0, -13.0]
+Action frequencies: [166, 163, 172]
+Expected reward per action: [-1.2530120481927711, -0.1901840490797546, -0.0755813953488372]
+W,L by action: [[4, 50], [56, 27], [63, 20]]
+Total rewards: 220
+Raise-fold wins: 54
+Bet-fold wins:  37
+
+
+26
+Hands played: 223
+Most recent action rewards: [-190.0, -33.0, 108.0]
+Action frequencies: [157, 184, 162]
+Expected reward per action: [-1.2101910828025477, -0.1793478260869565, 0.6666666666666666]
+W,L by action: [[9, 51], [57, 30], [63, 13]]
+Total rewards: 223
+Raise-fold wins: 50
+Bet-fold wins:  38
+
+
+27
+Hands played: 215
+Most recent action rewards: [-259.0, -62.0, 60.0]
+Action frequencies: [174, 163, 164]
+Expected reward per action: [-1.4885057471264367, -0.3803680981595092, 0.36585365853658536]
+W,L by action: [[7, 62], [47, 25], [57, 17]]
+Total rewards: 215
+Raise-fold wins: 44
+Bet-fold wins:  31
+
+
+28
+Hands played: 233
+Most recent action rewards: [-214.0, 32.0, -65.0]
+Action frequencies: [161, 165, 174]
+Expected reward per action: [-1.329192546583851, 0.19393939393939394, -0.3735632183908046]
+W,L by action: [[3, 59], [62, 22], [64, 23]]
+Total rewards: 233
+Raise-fold wins: 51
+Bet-fold wins:  47
+
+
+29
+Hands played: 221
+Most recent action rewards: [-244.0, -42.0, 40.0]
+Action frequencies: [183, 159, 159]
+Expected reward per action: [-1.3333333333333333, -0.2641509433962264, 0.25157232704402516]
+W,L by action: [[10, 58], [55, 25], [57, 15]]
+Total rewards: 220
+Raise-fold wins: 48
+Bet-fold wins:  41
+
+
+30
+Hands played: 221
+Most recent action rewards: [-230.0, -70.0, 69.0]
+Action frequencies: [181, 156, 164]
+Expected reward per action: [-1.270718232044199, -0.44871794871794873, 0.42073170731707316]
+W,L by action: [[4, 56], [57, 27], [59, 18]]
+Total rewards: 221
+Raise-fold wins: 45
+Bet-fold wins:  40
+
+
+31
+Hands played: 219
+Most recent action rewards: [-203.0, -69.0, -47.0]
+Action frequencies: [170, 147, 185]
+Expected reward per action: [-1.1941176470588235, -0.46938775510204084, -0.25405405405405407]
+W,L by action: [[9, 54], [47, 28], [59, 22]]
+Total rewards: 219
+Raise-fold wins: 49
+Bet-fold wins:  33
+
+
+32
+Hands played: 217
+Most recent action rewards: [-244.0, -75.0, 32.0]
+Action frequencies: [200, 146, 155]
+Expected reward per action: [-1.22, -0.5136986301369864, 0.2064516129032258]
+W,L by action: [[17, 61], [48, 25], [52, 14]]
+Total rewards: 217
+Raise-fold wins: 42
+Bet-fold wins:  32
+
+
+33
+Hands played: 205
+Most recent action rewards: [-246.0, -232.0, -103.0]
+Action frequencies: [183, 162, 156]
+Expected reward per action: [-1.3442622950819672, -1.4320987654320987, -0.6602564102564102]
+W,L by action: [[9, 55], [41, 33], [45, 22]]
+Total rewards: 205
+Raise-fold wins: 39
+Bet-fold wins:  29
+
+
+34
+Hands played: 223
+Most recent action rewards: [-141.0, -115.0, 7.0]
+Action frequencies: [175, 162, 164]
+Expected reward per action: [-0.8057142857142857, -0.7098765432098766, 0.042682926829268296]
+W,L by action: [[13, 48], [44, 33], [65, 20]]
+Total rewards: 223
+Raise-fold wins: 53
+Bet-fold wins:  29
+
+
+35
+Hands played: 237
+Most recent action rewards: [-197.0, -13.0, 97.0]
+Action frequencies: [177, 131, 193]
+Expected reward per action: [-1.112994350282486, -0.09923664122137404, 0.5025906735751295]
+W,L by action: [[7, 54], [50, 17], [86, 23]]
+Total rewards: 237
+Raise-fold wins: 69
+Bet-fold wins:  41
+
+
+36
+Hands played: 228
+Most recent action rewards: [-188.0, -14.0, 92.0]
+Action frequencies: [214, 153, 133]
+Expected reward per action: [-0.8785046728971962, -0.0915032679738562, 0.6917293233082706]
+W,L by action: [[6, 76], [44, 26], [64, 12]]
+Total rewards: 228
+Raise-fold wins: 51
+Bet-fold wins:  26
+
+
+37
+Hands played: 225
+Most recent action rewards: [-181.0, 21.0, 38.0]
+Action frequencies: [199, 141, 161]
+Expected reward per action: [-0.9095477386934674, 0.14893617021276595, 0.2360248447204969]
+W,L by action: [[9, 58], [56, 23], [64, 14]]
+Total rewards: 224
+Raise-fold wins: 51
+Bet-fold wins:  37
+
+
+38
+Hands played: 220
+Most recent action rewards: [-170.0, 4.0, 52.0]
+Action frequencies: [177, 157, 167]
+Expected reward per action: [-0.96045197740113, 0.025477707006369428, 0.31137724550898205]
+W,L by action: [[13, 53], [58, 26], [54, 16]]
+Total rewards: 220
+Raise-fold wins: 47
+Bet-fold wins:  38
+
+
+39
+Hands played: 232
+Most recent action rewards: [-210.0, 43.0, 40.0]
+Action frequencies: [174, 164, 163]
+Expected reward per action: [-1.206896551724138, 0.2621951219512195, 0.24539877300613497]
+W,L by action: [[7, 57], [65, 18], [66, 18]]
+Total rewards: 231
+Raise-fold wins: 51
+Bet-fold wins:  48
+
+
+40
+Hands played: 229
+Most recent action rewards: [-266.0, -114.0, 10.0]
+Action frequencies: [175, 145, 180]
+Expected reward per action: [-1.52, -0.7862068965517242, 0.05555555555555555]
+W,L by action: [[6, 62], [46, 24], [72, 18]]
+Total rewards: 228
+Raise-fold wins: 64
+Bet-fold wins:  33
+
+
+41
+Hands played: 216
+Most recent action rewards: [-210.0, -28.0, 58.0]
+Action frequencies: [154, 175, 171]
+Expected reward per action: [-1.3636363636363635, -0.16, 0.3391812865497076]
+W,L by action: [[3, 51], [67, 27], [51, 17]]
+Total rewards: 216
+Raise-fold wins: 33
+Bet-fold wins:  46
+
+
+42
+Hands played: 226
+Most recent action rewards: [-221.0, -17.0, -75.0]
+Action frequencies: [169, 176, 156]
+Expected reward per action: [-1.3076923076923077, -0.09659090909090909, -0.4807692307692308]
+W,L by action: [[11, 64], [55, 20], [53, 22]]
+Total rewards: 225
+Raise-fold wins: 46
+Bet-fold wins:  37
+
+
+43
+Hands played: 224
+Most recent action rewards: [-194.0, -90.0, 13.0]
+Action frequencies: [159, 161, 180]
+Expected reward per action: [-1.220125786163522, -0.5590062111801242, 0.07222222222222222]
+W,L by action: [[7, 45], [57, 27], [65, 22]]
+Total rewards: 223
+Raise-fold wins: 48
+Bet-fold wins:  45
+
+
+44
+Hands played: 213
+Most recent action rewards: [-244.0, -87.0, -28.0]
+Action frequencies: [179, 171, 151]
+Expected reward per action: [-1.3631284916201116, -0.5087719298245614, -0.18543046357615894]
+W,L by action: [[6, 56], [57, 28], [48, 18]]
+Total rewards: 213
+Raise-fold wins: 36
+Bet-fold wins:  41
+
+
+45
+Hands played: 232
+Most recent action rewards: [-177.0, 38.0, 60.0]
+Action frequencies: [162, 164, 176]
+Expected reward per action: [-1.0925925925925926, 0.23170731707317074, 0.3409090909090909]
+W,L by action: [[15, 46], [60, 20], [70, 20]]
+Total rewards: 231
+Raise-fold wins: 57
+Bet-fold wins:  46
+
+
+46
+Hands played: 219
+Most recent action rewards: [-253.0, -25.0, 13.0]
+Action frequencies: [189, 150, 163]
+Expected reward per action: [-1.3386243386243386, -0.16666666666666666, 0.07975460122699386]
+W,L by action: [[4, 65], [57, 24], [50, 17]]
+Total rewards: 217
+Raise-fold wins: 44
+Bet-fold wins:  38
+
+
+47
+Hands played: 208
+Most recent action rewards: [-177.0, 37.0, -68.0]
+Action frequencies: [179, 157, 164]
+Expected reward per action: [-0.9888268156424581, 0.2356687898089172, -0.4146341463414634]
+W,L by action: [[6, 49], [52, 25], [48, 28]]
+Total rewards: 208
+Raise-fold wins: 30
+Bet-fold wins:  34
+
+
+48
+Hands played: 225
+Most recent action rewards: [-264.0, -52.0, 75.0]
+Action frequencies: [182, 162, 157]
+Expected reward per action: [-1.4505494505494505, -0.32098765432098764, 0.47770700636942676]
+W,L by action: [[6, 64], [55, 27], [60, 13]]
+Total rewards: 225
+Raise-fold wins: 50
+Bet-fold wins:  39
+
+
+49
+Hands played: 228
+Most recent action rewards: [-167.0, -62.0, -23.0]
+Action frequencies: [120, 242, 138]
+Expected reward per action: [-1.3916666666666666, -0.256198347107438, -0.16666666666666666]
+W,L by action: [[6, 39], [76, 34], [52, 21]]
+Total rewards: 228
+Raise-fold wins: 43
+Bet-fold wins:  59
+
+
+50
+Hands played: 233
+Most recent action rewards: [-185.0, -24.0, 19.0]
+Action frequencies: [161, 184, 156]
+Expected reward per action: [-1.1490683229813665, -0.13043478260869565, 0.12179487179487179]
+W,L by action: [[9, 54], [70, 26], [55, 18]]
+Total rewards: 232
+Raise-fold wins: 42
+Bet-fold wins:  57
+
+
+51
+Hands played: 216
+Most recent action rewards: [-213.0, 0.0, 97.0]
+Action frequencies: [186, 169, 147]
+Expected reward per action: [-1.1451612903225807, 0.0, 0.6598639455782312]
+W,L by action: [[7, 58], [51, 21], [59, 20]]
+Total rewards: 216
+Raise-fold wins: 39
+Bet-fold wins:  39
+
+
+52
+Hands played: 239
+Most recent action rewards: [-152.0, -66.0, 70.0]
+Action frequencies: [155, 169, 178]
+Expected reward per action: [-0.9806451612903225, -0.3905325443786982, 0.39325842696629215]
+W,L by action: [[5, 47], [71, 29], [68, 18]]
+Total rewards: 238
+Raise-fold wins: 59
+Bet-fold wins:  52
+
+
+53
+Hands played: 220
+Most recent action rewards: [-123.0, -127.0, 20.0]
+Action frequencies: [154, 174, 172]
+Expected reward per action: [-0.7987012987012987, -0.7298850574712644, 0.11627906976744186]
+W,L by action: [[7, 42], [62, 35], [55, 19]]
+Total rewards: 220
+Raise-fold wins: 44
+Bet-fold wins:  45
+
+
+54
+Hands played: 234
+Most recent action rewards: [-207.0, 3.0, 171.0]
+Action frequencies: [117, 167, 216]
+Expected reward per action: [-1.7692307692307692, 0.017964071856287425, 0.7916666666666666]
+W,L by action: [[6, 43], [62, 17], [85, 20]]
+Total rewards: 233
+Raise-fold wins: 66
+Bet-fold wins:  51
+
+
+55
+Hands played: 232
+Most recent action rewards: [-157.0, -56.0, -30.0]
+Action frequencies: [78, 198, 224]
+Expected reward per action: [-2.0128205128205128, -0.2828282828282828, -0.13392857142857142]
+W,L by action: [[2, 27], [70, 32], [74, 26]]
+Total rewards: 231
+Raise-fold wins: 62
+Bet-fold wins:  54
+
+
+56
+Hands played: 225
+Most recent action rewards: [-119.0, -49.0, -105.0]
+Action frequencies: [82, 166, 254]
+Expected reward per action: [-1.451219512195122, -0.29518072289156627, -0.41338582677165353]
+W,L by action: [[3, 22], [57, 32], [84, 27]]
+Total rewards: 225
+Raise-fold wins: 69
+Bet-fold wins:  41
+
+
+57
+Hands played: 229
+Most recent action rewards: [-180.0, -75.0, 12.0]
+Action frequencies: [100, 150, 250]
+Expected reward per action: [-1.8, -0.5, 0.048]
+W,L by action: [[5, 25], [54, 29], [88, 28]]
+Total rewards: 229
+Raise-fold wins: 71
+Bet-fold wins:  35
+
+
+58
+Hands played: 227
+Most recent action rewards: [-237.0, -72.0, 207.0]
+Action frequencies: [113, 137, 252]
+Expected reward per action: [-2.0973451327433628, -0.5255474452554745, 0.8214285714285714]
+W,L by action: [[4, 35], [46, 26], [98, 17]]
+Total rewards: 226
+Raise-fold wins: 81
+Bet-fold wins:  29
+
+
+59
+Hands played: 232
+Most recent action rewards: [-111.0, -96.0, 149.0]
+Action frequencies: [76, 117, 309]
+Expected reward per action: [-1.4605263157894737, -0.8205128205128205, 0.48220064724919093]
+W,L by action: [[3, 16], [39, 27], [118, 29]]
+Total rewards: 232
+Raise-fold wins: 90
+Bet-fold wins:  25
+
+
+60
+Hands played: 224
+Most recent action rewards: [-209.0, -244.0, -33.0]
+Action frequencies: [93, 129, 279]
+Expected reward per action: [-2.247311827956989, -1.8914728682170543, -0.11827956989247312]
+W,L by action: [[4, 31], [36, 30], [90, 33]]
+Total rewards: 224
+Raise-fold wins: 74
+Bet-fold wins:  27
+
+
+61
+Hands played: 222
+Most recent action rewards: [-144.0, -121.0, 45.0]
+Action frequencies: [105, 142, 254]
+Expected reward per action: [-1.3714285714285714, -0.852112676056338, 0.17716535433070865]
+W,L by action: [[10, 28], [44, 29], [90, 21]]
+Total rewards: 222
+Raise-fold wins: 76
+Bet-fold wins:  29
+
+
+62
+Hands played: 234
+Most recent action rewards: [-155.0, -63.0, -4.0]
+Action frequencies: [89, 152, 260]
+Expected reward per action: [-1.7415730337078652, -0.4144736842105263, -0.015384615384615385]
+W,L by action: [[4, 31], [53, 26], [91, 29]]
+Total rewards: 234
+Raise-fold wins: 71
+Bet-fold wins:  37
+
+
+63
+Hands played: 234
+Most recent action rewards: [-156.0, -9.0, -37.0]
+Action frequencies: [87, 158, 257]
+Expected reward per action: [-1.793103448275862, -0.056962025316455694, -0.14396887159533073]
+W,L by action: [[3, 25], [58, 23], [98, 27]]
+Total rewards: 234
+Raise-fold wins: 87
+Bet-fold wins:  40
+
+
+64
+Hands played: 238
+Most recent action rewards: [-169.0, 41.0, 39.0]
+Action frequencies: [107, 141, 254]
+Expected reward per action: [-1.5794392523364487, 0.2907801418439716, 0.15354330708661418]
+W,L by action: [[6, 29], [52, 19], [101, 30]]
+Total rewards: 237
+Raise-fold wins: 89
+Bet-fold wins:  35
+
+
+65
+Hands played: 233
+Most recent action rewards: [-176.0, -259.0, 38.0]
+Action frequencies: [93, 131, 276]
+Expected reward per action: [-1.89247311827957, -1.9770992366412214, 0.13768115942028986]
+W,L by action: [[6, 28], [40, 33], [99, 27]]
+Total rewards: 233
+Raise-fold wins: 88
+Bet-fold wins:  28
+
+
+66
+Hands played: 225
+Most recent action rewards: [-168.0, -164.0, 117.0]
+Action frequencies: [92, 117, 292]
+Expected reward per action: [-1.826086956521739, -1.4017094017094016, 0.4006849315068493]
+W,L by action: [[2, 24], [33, 29], [108, 27]]
+Total rewards: 223
+Raise-fold wins: 87
+Bet-fold wins:  18
+
+
+67
+Hands played: 232
+Most recent action rewards: [-197.0, -151.0, 28.0]
+Action frequencies: [87, 111, 303]
+Expected reward per action: [-2.264367816091954, -1.3603603603603605, 0.0924092409240924]
+W,L by action: [[4, 23], [40, 23], [109, 33]]
+Total rewards: 232
+Raise-fold wins: 93
+Bet-fold wins:  29
+
+
+68
+Hands played: 230
+Most recent action rewards: [-122.0, -70.0, 202.0]
+Action frequencies: [93, 125, 288]
+Expected reward per action: [-1.3118279569892473, -0.56, 0.7013888888888888]
+W,L by action: [[4, 24], [46, 24], [104, 28]]
+Total rewards: 230
+Raise-fold wins: 82
+Bet-fold wins:  26
+
+
+69
+Hands played: 230
+Most recent action rewards: [-147.0, -166.0, 133.0]
+Action frequencies: [76, 140, 285]
+Expected reward per action: [-1.9342105263157894, -1.1857142857142857, 0.4666666666666667]
+W,L by action: [[6, 19], [40, 28], [112, 25]]
+Total rewards: 230
+Raise-fold wins: 88
+Bet-fold wins:  25
+
+
+70
+Hands played: 221
+Most recent action rewards: [-237.0, -116.0, 122.0]
+Action frequencies: [92, 146, 264]
+Expected reward per action: [-2.5760869565217392, -0.7945205479452054, 0.4621212121212121]
+W,L by action: [[0, 35], [49, 21], [91, 25]]
+Total rewards: 221
+Raise-fold wins: 75
+Bet-fold wins:  37
+
+
+71
+Hands played: 234
+Most recent action rewards: [-164.0, -57.0, 73.0]
+Action frequencies: [93, 159, 249]
+Expected reward per action: [-1.7634408602150538, -0.3584905660377358, 0.2931726907630522]
+W,L by action: [[4, 30], [46, 27], [101, 26]]
+Total rewards: 234
+Raise-fold wins: 84
+Bet-fold wins:  29
+
+
+72
+Hands played: 228
+Most recent action rewards: [-128.0, -25.0, 62.0]
+Action frequencies: [94, 152, 254]
+Expected reward per action: [-1.3617021276595744, -0.16447368421052633, 0.2440944881889764]
+W,L by action: [[4, 24], [53, 26], [97, 23]]
+Total rewards: 227
+Raise-fold wins: 80
+Bet-fold wins:  37
+
+
+73
+Hands played: 218
+Most recent action rewards: [-87.0, 182.0, -47.0]
+Action frequencies: [93, 144, 263]
+Expected reward per action: [-0.9354838709677419, 1.2638888888888888, -0.17870722433460076]
+W,L by action: [[5, 20], [70, 22], [78, 23]]
+Total rewards: 218
+Raise-fold wins: 66
+Bet-fold wins:  37
+
+
+74
+Hands played: 235
+Most recent action rewards: [-99.0, -38.0, -27.0]
+Action frequencies: [95, 175, 230]
+Expected reward per action: [-1.0421052631578946, -0.21714285714285714, -0.11739130434782609]
+W,L by action: [[7, 24], [59, 27], [92, 23]]
+Total rewards: 232
+Raise-fold wins: 76
+Bet-fold wins:  45
+
+
+75
+Hands played: 209
+Most recent action rewards: [-176.0, -53.0, -64.0]
+Action frequencies: [80, 142, 278]
+Expected reward per action: [-2.2, -0.3732394366197183, -0.2302158273381295]
+W,L by action: [[4, 20], [43, 30], [83, 27]]
+Total rewards: 207
+Raise-fold wins: 67
+Bet-fold wins:  29
+
+
+76
+Hands played: 233
+Most recent action rewards: [-163.0, 16.0, 32.0]
+Action frequencies: [82, 129, 289]
+Expected reward per action: [-1.9878048780487805, 0.12403100775193798, 0.11072664359861592]
+W,L by action: [[4, 23], [51, 23], [105, 27]]
+Total rewards: 233
+Raise-fold wins: 87
+Bet-fold wins:  35
+
+
+77
+Hands played: 226
+Most recent action rewards: [-149.0, -123.0, 8.0]
+Action frequencies: [69, 145, 286]
+Expected reward per action: [-2.1594202898550723, -0.8482758620689655, 0.027972027972027972]
+W,L by action: [[2, 23], [43, 24], [99, 33]]
+Total rewards: 224
+Raise-fold wins: 84
+Bet-fold wins:  24
+
+
+78
+Hands played: 237
+Most recent action rewards: [-172.0, -185.0, 68.0]
+Action frequencies: [78, 141, 282]
+Expected reward per action: [-2.2051282051282053, -1.3120567375886525, 0.24113475177304963]
+W,L by action: [[4, 24], [41, 36], [105, 27]]
+Total rewards: 237
+Raise-fold wins: 90
+Bet-fold wins:  27
+
+
+79
+Hands played: 250
+Most recent action rewards: [-158.0, -75.0, 23.0]
+Action frequencies: [74, 120, 306]
+Expected reward per action: [-2.135135135135135, -0.625, 0.07516339869281045]
+W,L by action: [[2, 26], [45, 28], [124, 25]]
+Total rewards: 250
+Raise-fold wins: 108
+Bet-fold wins:  26
+
+
+80
+Hands played: 238
+Most recent action rewards: [-161.0, 81.0, 51.0]
+Action frequencies: [76, 131, 293]
+Expected reward per action: [-2.1184210526315788, 0.6183206106870229, 0.17406143344709898]
+W,L by action: [[2, 21], [57, 24], [100, 31]]
+Total rewards: 235
+Raise-fold wins: 83
+Bet-fold wins:  35
+
+
+81
+Hands played: 226
+Most recent action rewards: [-190.0, -150.0, 152.0]
+Action frequencies: [71, 154, 275]
+Expected reward per action: [-2.676056338028169, -0.974025974025974, 0.5527272727272727]
+W,L by action: [[2, 24], [49, 31], [103, 17]]
+Total rewards: 226
+Raise-fold wins: 89
+Bet-fold wins:  40
+
+
+82
+Hands played: 224
+Most recent action rewards: [-204.0, -63.0, 110.0]
+Action frequencies: [69, 168, 266]
+Expected reward per action: [-2.9565217391304346, -0.375, 0.41353383458646614]
+W,L by action: [[5, 25], [56, 29], [86, 22]]
+Total rewards: 223
+Raise-fold wins: 73
+Bet-fold wins:  42
+
+
+83
+Hands played: 234
+Most recent action rewards: [-171.0, -163.0, 34.0]
+Action frequencies: [86, 141, 276]
+Expected reward per action: [-1.9883720930232558, -1.1560283687943262, 0.12318840579710146]
+W,L by action: [[3, 24], [50, 31], [100, 26]]
+Total rewards: 234
+Raise-fold wins: 87
+Bet-fold wins:  41
+
+
+84
+Hands played: 237
+Most recent action rewards: [-88.0, -86.0, 187.0]
+Action frequencies: [74, 139, 288]
+Expected reward per action: [-1.1891891891891893, -0.6187050359712231, 0.6493055555555556]
+W,L by action: [[7, 21], [54, 32], [103, 20]]
+Total rewards: 237
+Raise-fold wins: 80
+Bet-fold wins:  37
+
+
+85
+Hands played: 236
+Most recent action rewards: [-118.0, -40.0, 30.0]
+Action frequencies: [84, 153, 267]
+Expected reward per action: [-1.4047619047619047, -0.26143790849673204, 0.11235955056179775]
+W,L by action: [[2, 24], [64, 30], [90, 26]]
+Total rewards: 236
+Raise-fold wins: 78
+Bet-fold wins:  46
+
+
+86
+Hands played: 246
+Most recent action rewards: [-209.0, -106.0, 73.0]
+Action frequencies: [65, 146, 289]
+Expected reward per action: [-3.2153846153846155, -0.726027397260274, 0.25259515570934254]
+W,L by action: [[3, 24], [56, 30], [110, 23]]
+Total rewards: 246
+Raise-fold wins: 98
+Bet-fold wins:  41
+
+
+87
+Hands played: 240
+Most recent action rewards: [-81.0, -217.0, -46.0]
+Action frequencies: [82, 126, 292]
+Expected reward per action: [-0.9878048780487805, -1.7222222222222223, -0.15753424657534246]
+W,L by action: [[5, 20], [36, 35], [114, 30]]
+Total rewards: 240
+Raise-fold wins: 98
+Bet-fold wins:  25
+
+
+88
+Hands played: 232
+Most recent action rewards: [-162.0, -99.0, 94.0]
+Action frequencies: [75, 135, 291]
+Expected reward per action: [-2.16, -0.7333333333333333, 0.3230240549828179]
+W,L by action: [[3, 23], [40, 27], [108, 30]]
+Total rewards: 231
+Raise-fold wins: 95
+Bet-fold wins:  26
+
+
+89
+Hands played: 229
+Most recent action rewards: [-151.0, -227.0, 7.0]
+Action frequencies: [67, 109, 324]
+Expected reward per action: [-2.253731343283582, -2.0825688073394497, 0.021604938271604937]
+W,L by action: [[2, 17], [32, 31], [115, 32]]
+Total rewards: 229
+Raise-fold wins: 103
+Bet-fold wins:  18
+
+
+90
+Hands played: 238
+Most recent action rewards: [-189.0, 44.0, -39.0]
+Action frequencies: [71, 111, 320]
+Expected reward per action: [-2.6619718309859155, 0.3963963963963964, -0.121875]
+W,L by action: [[2, 23], [47, 23], [114, 29]]
+Total rewards: 238
+Raise-fold wins: 101
+Bet-fold wins:  30
+
+
+91
+Hands played: 228
+Most recent action rewards: [-141.0, -90.0, 221.0]
+Action frequencies: [69, 117, 314]
+Expected reward per action: [-2.0434782608695654, -0.7692307692307693, 0.7038216560509554]
+W,L by action: [[2, 17], [32, 22], [125, 28]]
+Total rewards: 226
+Raise-fold wins: 101
+Bet-fold wins:  26
+
+
+92
+Hands played: 230
+Most recent action rewards: [-189.0, -195.0, 200.0]
+Action frequencies: [62, 110, 329]
+Expected reward per action: [-3.0483870967741935, -1.7727272727272727, 0.60790273556231]
+W,L by action: [[3, 22], [33, 30], [116, 26]]
+Total rewards: 230
+Raise-fold wins: 91
+Bet-fold wins:  24
+
+
+93
+Hands played: 227
+Most recent action rewards: [-253.0, 21.0, 37.0]
+Action frequencies: [62, 103, 336]
+Expected reward per action: [-4.080645161290323, 0.20388349514563106, 0.11011904761904762]
+W,L by action: [[3, 22], [33, 20], [117, 30]]
+Total rewards: 225
+Raise-fold wins: 106
+Bet-fold wins:  15
+
+
+94
+Hands played: 223
+Most recent action rewards: [-151.0, -103.0, 50.0]
+Action frequencies: [72, 122, 307]
+Expected reward per action: [-2.0972222222222223, -0.8442622950819673, 0.16286644951140064]
+W,L by action: [[2, 17], [46, 25], [106, 26]]
+Total rewards: 222
+Raise-fold wins: 84
+Bet-fold wins:  35
+
+
+95
+Hands played: 240
+Most recent action rewards: [-116.0, -145.0, -9.0]
+Action frequencies: [69, 128, 303]
+Expected reward per action: [-1.681159420289855, -1.1328125, -0.0297029702970297]
+W,L by action: [[1, 23], [38, 33], [115, 30]]
+Total rewards: 240
+Raise-fold wins: 102
+Bet-fold wins:  21
+
+
+96
+Hands played: 230
+Most recent action rewards: [-105.0, -193.0, 16.0]
+Action frequencies: [53, 106, 342]
+Expected reward per action: [-1.9811320754716981, -1.820754716981132, 0.04678362573099415]
+W,L by action: [[1, 14], [31, 28], [122, 34]]
+Total rewards: 230
+Raise-fold wins: 103
+Bet-fold wins:  22
+
+
+97
+Hands played: 234
+Most recent action rewards: [-168.0, -147.0, 109.0]
+Action frequencies: [70, 123, 310]
+Expected reward per action: [-2.4, -1.1951219512195121, 0.35161290322580646]
+W,L by action: [[3, 21], [38, 35], [110, 27]]
+Total rewards: 234
+Raise-fold wins: 95
+Bet-fold wins:  25
+
+
+98
+Hands played: 231
+Most recent action rewards: [-186.0, 23.0, 212.0]
+Action frequencies: [64, 100, 336]
+Expected reward per action: [-2.90625, 0.23, 0.6309523809523809]
+W,L by action: [[1, 23], [37, 18], [123, 29]]
+Total rewards: 231
+Raise-fold wins: 103
+Bet-fold wins:  22
+
+
+99
+Hands played: 238
+Most recent action rewards: [-107.0, 39.0, 74.0]
+Action frequencies: [59, 102, 341]
+Expected reward per action: [-1.8135593220338984, 0.38235294117647056, 0.21700879765395895]
+W,L by action: [[1, 12], [41, 20], [126, 38]]
+Total rewards: 238
+Raise-fold wins: 105
+Bet-fold wins:  29

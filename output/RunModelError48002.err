@@ -1,0 +1,42 @@
+2023-12-10 19:35:14.982809: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: :/mnt/local/cuda/lib64:/mnt/local/petsc/lib:/mnt/local/cuba/lib:/usr/lib64/cernlib/2006-g77/lib:/mnt/local/gromacs/lib64:/mnt/local/cuda/lib64:/mnt/local/petsc/lib:/mnt/local/cuba/lib:/usr/lib64/cernlib/2006-g77/lib:/mnt/local/gromacs/lib64
+2023-12-10 19:35:14.983429: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
+WARNING:tensorflow:Model was constructed with shape (None, 16) for input KerasTensor(type_spec=TensorSpec(shape=(None, 16), dtype=tf.float32, name='dense_input'), name='dense_input', description="created by layer 'dense_input'"), but it was called on an input with incompatible shape (None,).
+Traceback (most recent call last):
+  File "/mnt/research/d.byrd/students/zbookbin/poker-goat/game/pokerGame.py", line 205, in <module>
+    main(sys.argv[1])
+  File "/mnt/research/d.byrd/students/zbookbin/poker-goat/game/pokerGame.py", line 196, in main
+    PokerGame(
+  File "/mnt/research/d.byrd/students/zbookbin/poker-goat/game/pokerGame.py", line 35, in __init__
+    self.model.trainModel()
+  File "/mnt/research/d.byrd/students/zbookbin/poker-goat/game/model.py", line 124, in trainModel
+    test_model(self.model)  
+  File "/mnt/research/d.byrd/students/zbookbin/poker-goat/game/model_tester.py", line 38, in test_model
+    qVals = model.predict(horrible_cards,verbose=0)[0]
+  File "/mnt/local/python3.9/lib/python3.9/site-packages/keras/utils/traceback_utils.py", line 67, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "/mnt/local/python3.9/lib/python3.9/site-packages/tensorflow/python/framework/func_graph.py", line 1129, in autograph_handler
+    raise e.ag_error_metadata.to_exception(e)
+ValueError: in user code:
+
+    File "/mnt/local/python3.9/lib/python3.9/site-packages/keras/engine/training.py", line 1621, in predict_function  *
+        return step_function(self, iterator)
+    File "/mnt/local/python3.9/lib/python3.9/site-packages/keras/engine/training.py", line 1611, in step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    File "/mnt/local/python3.9/lib/python3.9/site-packages/keras/engine/training.py", line 1604, in run_step  **
+        outputs = model.predict_step(data)
+    File "/mnt/local/python3.9/lib/python3.9/site-packages/keras/engine/training.py", line 1572, in predict_step
+        return self(x, training=False)
+    File "/mnt/local/python3.9/lib/python3.9/site-packages/keras/utils/traceback_utils.py", line 67, in error_handler
+        raise e.with_traceback(filtered_tb) from None
+    File "/mnt/local/python3.9/lib/python3.9/site-packages/keras/engine/input_spec.py", line 227, in assert_input_compatibility
+        raise ValueError(f'Input {input_index} of layer "{layer_name}" '
+
+    ValueError: Exception encountered when calling layer "sequential" (type Sequential).
+    
+    Input 0 of layer "dense" is incompatible with the layer: expected min_ndim=2, found ndim=1. Full shape received: (None,)
+    
+    Call arguments received:
+      • inputs=tf.Tensor(shape=(None,), dtype=int64)
+      • training=False
+      • mask=None
+
