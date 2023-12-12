@@ -1,6 +1,8 @@
 import json
 from constants import TOTAL_BUFFER_SIZE
 
+# util functions for reading to and writing from files
+
 def readExperiencesFile(fileName="experiences.json"):
 	with open(fileName, 'r') as file:
 		return json.load(file) # list of lists, each list is an experience tuple

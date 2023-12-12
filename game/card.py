@@ -1,5 +1,8 @@
 from constants import suits, ranks
 
+"""
+A simple card class with suit and rank attributes
+"""
 class Card():
 	def __init__(self, suit, rank):
 		self.suit = suit

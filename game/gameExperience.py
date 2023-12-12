@@ -1,8 +1,11 @@
-from collections import defaultdict
-import numpy as np
 from constants import REWARD_NORM
-from handRankUtil import judgeHand, handTypeToValue, calculateSimpleHandValue
+from handRankUtil import calculateSimpleHandValue
 from handScoreUtil import scoreHand
+
+"""
+A class that represents an (s,a,s',r) state as a GameExperience.
+"""
+
 class gameExperience():
 	def __init__(self, round, bettingLevel, pot, holeCards, commonCards, autoencoder):
 		self.round = round
@@ -81,17 +84,21 @@ class gameExperience():
 		self.action = action
 
 	def getState(self):
-			# self.holeCards + \
+		
+		# output from autoencoder (16-length)
 		return [self.modelInput]
 	
-		if self.commonCardList:
-			handScore = scoreHand(self.holeCardList, self.commonCardList) * 2 - 1
-		else:
-			handScore = calculateSimpleHandValue(self.holeCardList)
+		# hand score model input idea (somewhat worked?)
+		# if self.commonCardList:
+		# 	handScore = scoreHand(self.holeCardList, self.commonCardList) * 2 - 1
+		# else:
+		# 	handScore = calculateSimpleHandValue(self.holeCardList)
 
-		return [handScore] # -1 to 1
+		# return [handScore] # -1 to 1
 
+		# our original model input idea (didn't work)
 		# return \
+		# 	self.holeCards + \
 		# 	self.commonCards + \
 		# 	[
 		# 		self.suitMode, 

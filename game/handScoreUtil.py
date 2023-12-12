@@ -1,6 +1,11 @@
-from handRankUtil import judgeHand, compareAllHands
+from handRankUtil import compareAllHands
 from deck import Deck
 
+"""
+This function compares a hand to all possible hands that an opponent could have
+and checks the hand's winning percentage. Warning: this is very slow because 
+there are many thousands of hands to check against.
+"""
 def scoreHand(holeCards, commonCards):
 	fullDeck = Deck()
 	fullDeck.removeCardsFromDeck(commonCards)
@@ -24,8 +29,3 @@ def scoreHand(holeCards, commonCards):
 					losses += 1
 
 	return wins / (wins + losses)
-
-
-
-	
-	# allPossibleHands = 

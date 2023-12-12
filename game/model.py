@@ -7,6 +7,10 @@ import os
 from utils import readExperiencesFile, expToFile, deleteFileContent
 from constants import BATCH_SIZE, STARTING_EPSILON, EPSILON_MULTIPLIER, MODEL_INPUT_SIZE
 
+"""
+A deep Q network that trains on game experiences, use MSE loss, where the loss 
+is the different between the correct Q value and the predicted Q value.
+"""
 class Model():
     def __init__(self, load_model=False):
         if load_model:

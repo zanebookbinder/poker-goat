@@ -10,6 +10,12 @@ import sys
 from card import Card
 import random
 
+"""
+A class that runs a poker game, including state, players, actions, etc.
+This class takes an input integer and runs that many batches of playing/model 
+training loops.
+"""
+
 class PokerGame:
     def __init__(self, num_batches, load_model, players, start_ante, bet_amount):
         self.model = Model(load_model=load_model)
@@ -70,13 +76,6 @@ class PokerGame:
         # ask everyone if they want to bet
         for player in self.gameState.getActivePlayers():
             self.playerTurn(player, sharedCards, False)
-
-        
-
-        # if self.gameState.players[0].currentBet > self.gameState.players[1].currentBet and self.gameState.players[1].folded == False:
-        #     print("THIS SHOULD NOT BE HAPPENINGGGGGG")
-
-
 
         activePlayerBets = [p.currentBet for p in self.gameState.getActivePlayers()]
         

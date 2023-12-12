@@ -2,6 +2,9 @@ from card import Card
 from constants import suits, ranks
 import random
 
+"""
+A deck class that creates all cards in a Deck and can deal.
+"""
 class Deck():
 	def __init__(self):
 		self.cards = self.createDeck()

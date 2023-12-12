@@ -3,6 +3,10 @@ from constants import REWARD_NORM
 from model import Model
 from card import Card
 
+"""
+A simple method for testing a model on very bad cards and very good cards.
+"""
+
 # horrible_cards = [
 # 	[#1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  # 13 hole cards
 # 		0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0,  # 13 common cards

@@ -3,6 +3,9 @@ import random
 from handRankUtil import judgeHand
 from handScoreUtil import scoreHand
 
+"""
+A poker player.
+"""
 class Player():
 	def __init__(self, name, index, chipCount):
 		self.name = name

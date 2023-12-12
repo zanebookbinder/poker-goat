@@ -3,6 +3,8 @@ from card import Card
 from collections import Counter
 
 """
+This file contains functions that evaluate how good a hand is.
+
 Hand rankings
 1. Straight flush
 2. Four of a kind

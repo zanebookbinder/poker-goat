@@ -1,9 +1,10 @@
 from deck import Deck
 from constants import dealSystem, commonCardSize
-from player import Player
 from handRankUtil import *
-import random
 
+"""
+The state of a Poker Game, including bets, cards, players, etc.
+"""
 class GameState():
 	def __init__(self, players, start_ante):
 		self.players = players
@@ -44,30 +45,6 @@ class GameState():
 		for _ in range(numCardsToDeal):
 			nextCard = self.deck.selectRandomCard()
 			self.sharedCards.append(nextCard)
-
-		# haveGreatHand = random.choice([True, False])
-		# if haveGreatHand:
-		# 	cards = self.deck.selectGreatCards(2)
-		# 	commonCards = self.deck.selectGreatCards(3)
-		# else:
-		# 	cards = self.deck.selectBadCards(2)
-		# 	commonCards = self.deck.selectBadCards(3)
-			
-		# for c in cards:
-		# 	self.players[0].receiveCard(c)
-
-		# for c in commonCards:
-		# 	self.sharedCards.append(c)
-
-		# for _ in range(numCardsToDeal):
-		# 	# for i in range(len(self.players)):
-		# 	nextCard = self.deck.selectRandomCard()
-		# 	self.players[1].receiveCard(nextCard)
-
-		# # numCardsToDeal = commonCardSize
-		# # for _ in range(numCardsToDeal):
-		# # 	nextCard = self.deck.selectRandomCard()
-		# # 	self.sharedCards.append(nextCard)
 
 	def bet(self, playerIndex, amount):
 		self.players[playerIndex].bet(amount)

@@ -1,5 +1,6 @@
-from card import Card
-
+"""
+A hand of cards
+"""
 class Hand():
 	def __init__(self):
 		self.cards = []

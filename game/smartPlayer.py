@@ -3,6 +3,9 @@ from handScoreUtil import scoreHand
 import numpy as np
 from handRankUtil import calculateSimpleHandValue
 
+"""
+A Player subclass that chooses actions based on hand strength.
+"""
 class SmartPlayer(Player):
 	def __init__(self, name, index, chipCount):
 		super().__init__(name, index, chipCount)

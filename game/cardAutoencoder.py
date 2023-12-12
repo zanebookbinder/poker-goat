@@ -4,7 +4,10 @@ from keras.models import  Model, load_model
 from keras.layers import Dense, Input
 import os
 
-
+"""
+An autoencoder that transforms a 52-length vector with either 2 or 3 cards into
+an 8-length array that represents it more compactly.
+"""
 class AutoEncoder():
     def __init__(self, load_model = True):
         if load_model:
@@ -25,6 +28,7 @@ class AutoEncoder():
 
         print('Finished training!')
 
+    # generate all possible hands for model training
     def generateAllHands(self):
         outputHands = []
 
