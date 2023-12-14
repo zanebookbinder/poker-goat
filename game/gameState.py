@@ -10,6 +10,7 @@ class GameState():
 		self.players = players
 		self.ante = start_ante
 
+	# player antes and deal cards
 	def startNewHand(self):
 		self.startingChipAmounts = [player.chipCount for player in self.players]
 		self.sharedCards = []
@@ -34,6 +35,7 @@ class GameState():
 		for player in self.players:
 			player.currentBet = 0
 		
+	# deal all cards (and common cards)
 	def deal(self):
 		numCardsToDeal = dealSystem[self.round]
 		for _ in range(numCardsToDeal):
@@ -46,11 +48,13 @@ class GameState():
 			nextCard = self.deck.selectRandomCard()
 			self.sharedCards.append(nextCard)
 
+	# carry out bet action
 	def bet(self, playerIndex, amount):
 		self.players[playerIndex].bet(amount)
 		self.pot += amount
 		self.currentRoundBet = max(self.currentRoundBet, self.players[playerIndex].currentBet)
 
+	# carry out fold action
 	def fold(self, playerIndex):
 		self.players[playerIndex].folded = True
 		self.players[playerIndex].foldedCounter += 1
@@ -58,6 +62,7 @@ class GameState():
 	def getActivePlayers(self):
 		return [p for p in self.players if not p.folded]
 
+	# return the winner and their reason for winning
 	def checkWinner(self):
 		activePlayers = self.getActivePlayers()
 		if len(activePlayers) == 1:
@@ -80,6 +85,7 @@ class GameState():
 		self.winnerDict = winningPlayersToHandsDict
 		return self.winnerDict
 
+	# print out key information about what happened in the hand
 	def summarizeGame(self):
 		for p in self.players:
 			print(p.name, 'won', p.handWinCounter, 'hands and folded', p.foldedCounter, 'times')

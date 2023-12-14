@@ -25,22 +25,27 @@ class PokerGame:
         self.game_experiences = defaultdict(list)
         self.experiences_counter = 0
 
+        # variables to help debug the model's performance during training
         self.actionFrequencies = [0,0,0]
         self.mostRecentActionRewards = [0,0,0]
         self.wLByAction = [[0,0], [0,0,], [0,0]]
         self.raiseFoldWins = 0
         self.betFoldWins = 0
 
+        # run 'n' batches of the playing/training loop
         for i in range(num_batches):
             print('\n')
             print(i)
+            
             self.playSimplePoker()
+            
             gameExperiences = [gE.getRLInfo() for sublist in self.game_experiences.values() for gE in sublist]
             expToFile(gameExperiences)
 
             self.model.trainModel()
             self.experiences_counter = 0
-            
+
+    # play hands until the batch size is reached     
     def playSimplePoker(self):
         self.handsPlayed = 0
         while self.experiences_counter < BATCH_SIZE:
@@ -70,6 +75,7 @@ class PokerGame:
         self.raiseFoldWins = 0
         self.betFoldWins = 0
 
+    # ask every player to bet, continue until everyone has bet equally or folded
     def roundOfBetting(self, sharedCards):
         self.gameState.startNewRound()
 
@@ -87,6 +93,7 @@ class PokerGame:
 
             activePlayerBets = [p.currentBet for p in self.gameState.getActivePlayers()]
 
+    # create a GameExperience representing each situation, use model to determine action
     def playerTurn(
         self, player, commonCards, verbose=False
     ):
@@ -103,18 +110,14 @@ class PokerGame:
         )
 
         action = player.chooseBestAction(self.model, newGameExperience, commonCards)
-
-        # FAKE GAME WITH 10, 0, -10 REWARDS
-        # rewards = [10, 0, -10]
-        # newGameExperience.setGameReward(rewards[action])
         
-        # ONLY DO THIS FOR NON-SMART PLAYER
+        # Add GameExperience to storage dictionary for player using the model
         if not player.index:
 
             self.actionFrequencies[action] += 1
             newGameExperience.setActionTaken(action)
 
-            # If there is a prior experience from this hand
+            # If there is a prior experience from this hand, set s' on that
             if player.hasTakenATurnThisHand:
                 mostRecentExperience = self.game_experiences[playerIndex][-1]
                 mostRecentExperience.setNextGameExperience(newGameExperience)
@@ -158,6 +161,7 @@ class PokerGame:
                     print('checking')
                 return
 
+    # end the hand by distributing chips
     def assignRewards(self, winnerDict):
         rewards = []
 
@@ -186,6 +190,7 @@ class PokerGame:
                 if actionTaken == 1 and 'wins as the only remaining player' in winnerDict.values():
                     self.betFoldWins += 1
 
+# run the PokerGame class with two players and num_batches batches
 def main(num_batches):
     player1 = Player("Rahul", 0, 0)
     player2 = SmartPlayer("Zane", 1, 0)
