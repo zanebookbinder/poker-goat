@@ -8,7 +8,7 @@ of 2023 with Professor Dave Byrd at Bowdoin College.
 
 ### What We Did
 We attempted to use Reinforcement Learning to create a Poker player that could
-understand it's cards, the game situation, etc. and then make an optimal decision
+understand its cards, the game situation, etc. and then make an optimal decision
 about what action to take. We began by building the game, then began creating 
 RL experiences from game play. After that, we incorportated a model that chose 
 actions. We calculated the correct Q values using the Bellman Equation. Rewards
